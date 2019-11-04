@@ -3,16 +3,16 @@ package com.ssm.pojo;
 import java.util.List;
 
 public class Menu {
-	private int id;
+	private Integer id;
 	private String name;
-	private int belong;
+	private Integer belong;
 	private List<Menu> subMenus;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -24,11 +24,11 @@ public class Menu {
 		this.name = name;
 	}
 
-	public int getBelong() {
+	public Integer getBelong() {
 		return belong;
 	}
 
-	public void setBelong(int belong) {
+	public void setBelong(Integer belong) {
 		this.belong = belong;
 	}
 

@@ -18,3 +18,11 @@ CREATE TABLE `test` (
 insert into test values(default,"张三","");
 insert into test values(default,"李四","");
 insert into test values(default,"王五","");
+
+之后的数据库信息附带在blog.sql中
+导入方法
+如果没有blog数据库则新建，有则跳过这一步
+在Navicat中连接上数据库后选中该数据库右键
+选择运行SQL文件
+在文件中找到blog.sql文件
+点击开始即可

@@ -1,29 +1,41 @@
 package com.ssm.pojo;
 
 public class Article {
-	private int id;
-	private int menu_id;
+	private Integer id;
+	private Integer menu_id;
+	private String type;
 	private String title;
 	private String author;
 	private String date;
-	private int browse;
-	private int collect;
+	private String detailDate;
+	private Integer browse;
+	private Integer comment;
+	private Integer collect;
 	private String content;
+	private String picUri;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getMenu_id() {
+	public Integer getMenu_id() {
 		return menu_id;
 	}
 
-	public void setMenu_id(int menu_id) {
+	public void setMenu_id(Integer menu_id) {
 		this.menu_id = menu_id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getTitle() {
@@ -50,19 +62,35 @@ public class Article {
 		this.date = date;
 	}
 
-	public int getBrowse() {
+	public String getDetailDate() {
+		return detailDate;
+	}
+
+	public void setDetailDate(String detailDate) {
+		this.detailDate = detailDate;
+	}
+
+	public Integer getBrowse() {
 		return browse;
 	}
 
-	public void setBrowse(int browse) {
+	public void setBrowse(Integer browse) {
 		this.browse = browse;
 	}
 
-	public int getCollect() {
+	public Integer getComment() {
+		return comment;
+	}
+
+	public void setComment(Integer comment) {
+		this.comment = comment;
+	}
+
+	public Integer getCollect() {
 		return collect;
 	}
 
-	public void setCollect(int collect) {
+	public void setCollect(Integer collect) {
 		this.collect = collect;
 	}
 
@@ -72,5 +100,13 @@ public class Article {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getPicUri() {
+		return picUri;
+	}
+
+	public void setPicUri(String picUri) {
+		this.picUri = picUri;
 	}
 }
