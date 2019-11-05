@@ -3,3 +3,6 @@ build
 classes
 .idea
 *.iml
+.classpath
+.project
+.settings
