@@ -21,8 +21,22 @@ public class MhrController {
 
 	@RequestMapping("main")
 	public String main(HttpServletRequest request) {
-		PageInfo pageInfo=csfService.selectArticles(new PageInfo());
+		String pageNumberStr = request.getParameter("pageNumber");
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setType(request.getParameter("type"));
+		pageInfo.setDate(request.getParameter("date"));
+		if (pageNumberStr != null) {
+			pageInfo.setPageNumber(Integer.parseInt(pageNumberStr));
+		}
+		pageInfo = csfService.selectArticles(pageInfo);
 		request.setAttribute("pageInfo", pageInfo);
+		Integer[] pageCount = new Integer[pageInfo.getTotalPage()];// 该空数组只用于页码个数的迭代显示
+		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("collect", csfService.selectCollectArticles());
+		request.setAttribute("comment", csfService.selectCommentArticles());
+		request.setAttribute("articleDates", csfService.selectAllArticleDate());
+		request.setAttribute("tags", csfService.selectAllTags());
+		request.setAttribute("links", csfService.selectAllLinks());
 		return "mhr/main";
 	}
 

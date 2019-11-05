@@ -3,6 +3,7 @@ package com.ssm.csf.service;
 import java.util.List;
 
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 import com.ssm.pojo.Tag;
@@ -53,4 +54,18 @@ public interface CsfService {
 	 * @return
 	 */
 	List<Tag> selectAllTags();
+
+	/**
+	 * 查询评论最多的前五条文章
+	 * 
+	 * @return
+	 */
+	List<Article> selectCommentArticles();
+
+	/**
+	 * 查询所有的友情链接
+	 * 
+	 * @return
+	 */
+	List<Link> selectAllLinks();
 }

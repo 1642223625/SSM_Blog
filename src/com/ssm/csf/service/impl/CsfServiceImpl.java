@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ssm.csf.mapper.CsfMapper;
 import com.ssm.csf.service.CsfService;
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 import com.ssm.pojo.Tag;
@@ -56,6 +57,16 @@ public class CsfServiceImpl implements CsfService {
 	@Override
 	public List<Tag> selectAllTags() {
 		return csfMapper.selectAllTags();
+	}
+
+	@Override
+	public List<Article> selectCommentArticles() {
+		return csfMapper.selectCommentArticles();
+	}
+
+	@Override
+	public List<Link> selectAllLinks() {
+		return csfMapper.selectAllLinks();
 	}
 
 }

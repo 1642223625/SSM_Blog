@@ -16,6 +16,7 @@ import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 
 @Controller
+@RequestMapping("csf")
 public class CsfController {
 	Logger logger = Logger.getLogger(getClass());
 	@Resource
@@ -29,7 +30,7 @@ public class CsfController {
 		return "csf/menu";
 	}
 
-	@RequestMapping("article")
+	@RequestMapping("articleByPage")
 	public String article(HttpServletRequest request) {
 		String pageNumberStr = request.getParameter("pageNumber");
 		PageInfo pageInfo = new PageInfo();
@@ -38,18 +39,21 @@ public class CsfController {
 		}
 		csfService.selectArticles(pageInfo);
 		request.setAttribute("pageInfo", pageInfo);
+		Integer[] pageCount = new Integer[pageInfo.getTotalPage()];
+		request.setAttribute("pageCount", pageCount);
 		return "csf/article";
 	}
 
-	@SuppressWarnings("unchecked")
 	@RequestMapping("singleArticle")
 	public String singleArticle(HttpServletRequest request) {
-		System.out.println("执行该方法如果报错，请先执行menu请求，然后在singleArticle后加上一个id参数");
-		int article_id = Integer.parseInt(request.getParameter("id"));
+		int article_id = 1;
+		String article_idStr = request.getParameter("id");
+		if (article_idStr != null) {
+			article_id = Integer.parseInt(article_idStr);
+		}
 		Article article = csfService.selectArticleById(article_id);
 		request.setAttribute("article", article);
-		request.setAttribute("path", CSFUtil.getNavPath((List<Menu>) request.getServletContext().getAttribute("menus"),
-				article.getMenu_id()));
+		request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
 		return "csf/singleArticle";
 	}
 
@@ -69,5 +73,17 @@ public class CsfController {
 	public String tags(HttpServletRequest request) {
 		request.setAttribute("tags", csfService.selectAllTags());
 		return "csf/tag";
+	}
+
+	@RequestMapping("commentArticle")
+	public String commentArticle(HttpServletRequest request) {
+		request.setAttribute("comment", csfService.selectCommentArticles());
+		return "csf/comment";
+	}
+
+	@RequestMapping("links")
+	public String links(HttpServletRequest request) {
+		request.setAttribute("links", csfService.selectAllLinks());
+		return "csf/links";
 	}
 }

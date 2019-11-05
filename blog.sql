@@ -11,7 +11,7 @@
  Target Server Version : 50562
  File Encoding         : 65001
 
- Date: 04/11/2019 17:57:47
+ Date: 05/11/2019 17:38:15
 */
 
 SET NAMES utf8mb4;
@@ -34,16 +34,77 @@ CREATE TABLE `article`  (
   `collect` int(10) NULL DEFAULT NULL COMMENT '喜欢',
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '论文内容',
   `picUri` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题图片Uri',
+  `uri` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '网页相对路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES (1, 13, 'Java', 'Java从入门到精通', 'Mango', '2019年十月', '2019-10-20 17:00', 100, 100, 100, '这是博文内容', NULL);
-INSERT INTO `article` VALUES (2, 15, 'HTML', 'HTML开发指南', 'Mango', '2019年十一月', '2019-11-5 10:20', 200, 200, 200, '这也是博文内容', NULL);
-INSERT INTO `article` VALUES (3, 18, 'Other', '知识付费的发展趋势', 'Mango', '2019年十月', '2019-10-10 14:00', 300, 300, 300, '这还是博文内容', NULL);
-INSERT INTO `article` VALUES (4, 18, 'Other', '谈一谈博客的关注解锁文章功能', 'Mango', '2019年十一月', '2019-11-10 18:00', 400, 400, 400, '哈哈，博文内容', NULL);
+INSERT INTO `article` VALUES (1, 13, 'Java', 'Java从入门到精通', 'Mango', '2019年十月', '2019-10-20 17:00', 100, 100, 100, '这是博文内容', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (2, 15, 'HTML', 'HTML开发指南', 'Mango', '2019年十一月', '2019-11-05 10:20', 200, 200, 200, '这也是博文内容', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (3, 18, 'Other', '知识付费的发展趋势', 'Mango', '2019年十月', '2019-10-10 14:00', 300, 300, 300, '这还是博文内容', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (4, 18, 'Other', '谈一谈博客的关注解锁文章功能', 'Mango', '2019年十一月', '2019-11-10 18:00', 400, 400, 400, '哈哈，博文内容', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (5, 16, 'Python', 'ADSL 拨号代理', 'Mango', '2019年十月', '2019-10-20 13:30', 150, 150, 150, 'Emmmm', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (6, 19, '爬虫', '爬虫工程师最想要的JS逆向教程', 'Mango', '2019年十一月', '2019-11-19 09:50', 350, 350, 350, 'Emmmm', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (7, 12, 'C/C++', 'OpenGL绘图学习总结', 'Mango', '2016年二月', '2016-02-11 21:00', 100, 100, 100, 'Emmmm', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (8, 14, 'PHP', 'WordPress远程附件上传', 'Mango', '2017年三月', '2017-03-12 08:00', 300, 300, 300, 'Emmmm', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (9, 20, 'Linux', '关于Ubuntu开机问题', 'Mango', '2015年十一月', '2015-11-13 16:00', 450, 450, 450, 'Emmmm', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (10, 21, 'CSS', '利用Sass自动生成padding和margin边距样式', 'Mango', '2016年十月', '2016-10-29 22:00', 550, 550, 550, '哈哈哈哈哈哈', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (11, 22, 'Bootstrap', 'Bootstrap提取并编译Flexbox Grid系统', 'Mango', '2016年十月', '2016-10-29 19:00', 600, 600, 600, '嘿嘿嘿', 'block.jpg', NULL);
+
+-- ----------------------------
+-- Table structure for link
+-- ----------------------------
+DROP TABLE IF EXISTS `link`;
+CREATE TABLE `link`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of link
+-- ----------------------------
+INSERT INTO `link` VALUES (1, '91博客', 'http://www.9191boke.com/');
+INSERT INTO `link` VALUES (2, 'Cpphp', 'https://www.3maio.com/');
+INSERT INTO `link` VALUES (3, 'Diygod', 'https://diygod.me/');
+INSERT INTO `link` VALUES (4, 'Findspace', 'https://www.findhao.net/');
+INSERT INTO `link` VALUES (5, 'Higuoxing', 'https://higuoxing.com/');
+INSERT INTO `link` VALUES (6, 'it技术社区', 'http://www.51dev.com/');
+INSERT INTO `link` VALUES (7, 'jank', 'http://www.jankl.com/');
+INSERT INTO `link` VALUES (8, 'Monkey前端博客', 'http://monkeyblog.cn/');
+INSERT INTO `link` VALUES (9, 'nopcommerce', 'http://www.urselect.com/?aid=dnk9st');
+INSERT INTO `link` VALUES (10, 'Python教程', 'https://www.yuanrenxue.com/');
+INSERT INTO `link` VALUES (11, 'Python量化投资', 'http://www.lizenghai.com/');
+INSERT INTO `link` VALUES (12, '云立方', 'http://www.yunlifang.cn/?jm');
+INSERT INTO `link` VALUES (13, '冰蓝', 'http://lanbing510.info/');
+INSERT INTO `link` VALUES (14, '冷月的博客', 'https://lengyue.me/');
+INSERT INTO `link` VALUES (15, '千寻啊千寻', 'http://qianxunclub.com/');
+INSERT INTO `link` VALUES (16, '可道云', 'http://kodcloud.com/');
+INSERT INTO `link` VALUES (17, '坤坤大神', 'http://www.kunkundashen.cn/');
+INSERT INTO `link` VALUES (18, '天善智能', 'http://www.hellobi.com/');
+INSERT INTO `link` VALUES (19, '岑冲个人博客', 'http://www.cenchong.com/');
+INSERT INTO `link` VALUES (20, '开飞机的小蜗牛', 'https://upliu.net/');
+INSERT INTO `link` VALUES (21, '张小鸡', 'http://www.zxiaoji.com/');
+INSERT INTO `link` VALUES (22, '张弦先生', 'http://www.chrafz.com/');
+INSERT INTO `link` VALUES (23, '张志明的个人博客', 'http://www.503error.com/');
+INSERT INTO `link` VALUES (24, '方法SEO顾问', 'https://seofangfa.com/');
+INSERT INTO `link` VALUES (25, '极客导航', 'http://www.jikedaohang.com/');
+INSERT INTO `link` VALUES (26, '汇智网', 'http://www.hubwiz.com/');
+INSERT INTO `link` VALUES (27, '江南消夏', 'http://frankchen.xyz/');
+INSERT INTO `link` VALUES (28, '泥瓦匠BYSocket', 'http://bysocket.com/');
+INSERT INTO `link` VALUES (29, '熊哥club', 'http://www.xiongge.club/');
+INSERT INTO `link` VALUES (30, '知语', 'http://zerlong.com/');
+INSERT INTO `link` VALUES (31, '码农De边缘世界', 'https://www.binblogs.cn/');
+INSERT INTO `link` VALUES (32, '程序员虾说', 'http://ysir308.com/');
+INSERT INTO `link` VALUES (33, '程序喵', 'http://ibloger.net/');
+INSERT INTO `link` VALUES (34, '红色石头', 'http://redstonewill.com/');
+INSERT INTO `link` VALUES (35, '老董博客', 'http://www.laodong.me/');
+INSERT INTO `link` VALUES (36, '蓝骑兵', 'http://www.lanqibing.com/');
+INSERT INTO `link` VALUES (37, '赵帅的个人博客', 'http://zhaoshuai.me/');
+INSERT INTO `link` VALUES (38, '陈文管的博客', 'https://www.chenwenguan.com/');
 
 -- ----------------------------
 -- Table structure for menu
@@ -54,7 +115,7 @@ CREATE TABLE `menu`  (
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单名称',
   `belong` int(10) NULL DEFAULT NULL COMMENT '菜单所属父级ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of menu
@@ -77,6 +138,10 @@ INSERT INTO `menu` VALUES (15, 'HTML', 3);
 INSERT INTO `menu` VALUES (16, 'Python', 3);
 INSERT INTO `menu` VALUES (17, 'JS', 3);
 INSERT INTO `menu` VALUES (18, 'Other', 3);
+INSERT INTO `menu` VALUES (19, '爬虫', 3);
+INSERT INTO `menu` VALUES (20, 'Linux', 3);
+INSERT INTO `menu` VALUES (21, 'CSS', 3);
+INSERT INTO `menu` VALUES (22, 'Bootstrap', 3);
 
 -- ----------------------------
 -- Table structure for test

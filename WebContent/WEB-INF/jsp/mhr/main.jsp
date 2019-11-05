@@ -56,9 +56,9 @@
 						<li class="nav-item"><a class="nav-link" href="#">福利专区</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">关于博主</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">给我留言</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">给我留言</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">赞助作者</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">技术交流</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">项目合作</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -97,14 +97,31 @@
 						<span class="carousel-control-next-icon"></span>
 					</a>
 				</div>
+				<div class="block">
+					<span>热门排行</span>
+					<hr>
+					<c:forEach items="${collect}" var="article" varStatus="status">
+						<div class="d-flex">
+							<div class="p-2">
+								<span class="mybutton">${status.count}</span>
+							</div>
+							<div class="p-2">
+								<a href="csf/singleArticle?id=${article.id}">${article.title}----<i
+									class="fa fa-heart"></i>${article.collect}</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 				<c:forEach items="${pageInfo.list}" var="article">
 					<div class="block">
 						<div class="head">
-							<span class="type">${article.type}</span> <a class="title" href="">${article.title}</a>
+							<span class="type">${article.type}</span> <a class="title"
+								href="csf/singleArticle?id=${article.id}">${article.title}</a>
 						</div>
 						<div class="d-flex flex-row">
 							<div class="p-2">
-								<img width="165px" height="110px" src="images/block.jpg" alt="">
+								<img width="165px" height="110px" src="images/${article.picUri}"
+									alt="${article.title}">
 							</div>
 							<div class="p-2">
 								<p>${article.content}</p>
@@ -129,12 +146,93 @@
 						</div>
 					</div>
 				</c:forEach>
+				<ul class="pagination">
+					<li
+						class="page-item <c:if test="${pageInfo.pageNumber==1}">disabled</c:if>"><a
+						class="page-link"
+						href="main?pageNumber=${pageInfo.pageNumber-1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">上一页</a></li>
+					<c:forEach items="${pageCount}" varStatus="status">
+						<li
+							class="page-item <c:if test="${pageInfo.pageNumber==status.count}">active</c:if>"><a
+							class="page-link"
+							href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a></li>
+					</c:forEach>
+					<li
+						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
+						class="page-link"
+						href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a></li>
+					<c:if test="${pageInfo.date!=null or pageInfo.type!=null}">
+						<li class="page-item"><a class="page-link" href="main">清除筛选条件</a></li>
+					</c:if>
+				</ul>
 			</div>
 		</div>
-		<div class="aside mt-3">侧边栏</div>
+		<div class="aside">
+			<div class="block">
+				<span>文章归档</span>
+				<hr>
+				<div class="d-flex flex-wrap">
+					<c:forEach items="${articleDates}" var="date">
+						<div class="p-2 width-165">
+							<a href="main?date=${date}"
+								<c:if test="${date eq pageInfo.date}">style="color: red;"</c:if>>${date}</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="block">
+				<span>猜你喜欢</span>
+				<c:forEach items="${comment}" var="article">
+					<hr>
+					<div class="d-flex">
+						<div class="p-2">
+							<img width="99px" height="66px" src="images/${article.picUri}"
+								alt="img">
+						</div>
+						<div class="p-1">
+							<a href="csf/singleArticle?id=${article.id}">${article.title}</a>
+						</div>
+					</div>
+					<div class="d-flex flex-row-reverse"
+						style="margin-top: -34px; font-size: 10px;">
+						<div class="p-2">
+							<i class="fa fa-comments"></i>${article.comment}
+						</div>
+						<div class="p-2">
+							<i class="fa fa-clock-o"></i>${article.date}
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="block">
+				<span>标签云</span>
+				<hr>
+				<div class="d-flex flex-wrap">
+					<c:forEach items="${tags}" var="tag">
+						<div class="p-2 width-165">
+							<a href="main?type=${tag.type}"
+								<c:if test="${type eq pageInfo.type}">style="color: red;"</c:if>>${tag.type}</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="block">
+				<span>友情链接</span>
+				<hr>
+				<div class="d-flex flex-wrap">
+					<c:forEach items="${links}" var="link">
+						<div class="p-2 width-165" style="text-align: center;">
+							<a href="${link.url}">${link.name}</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 		<div class="clear"></div>
 	</section>
-	<footer class="footer"> 底部 </footer>
+	<footer class="footer d-flex flex-wrap align-content-center mt-2">
+		<div class="p-2 text-white w-100 text-center">河南大学2019年大三Javaweb大作业</div>
+	</footer>
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 </body>

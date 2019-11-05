@@ -2,6 +2,7 @@ package com.ssm.csf.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -9,10 +10,12 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 import com.ssm.pojo.Tag;
 
+@CacheNamespace
 public interface CsfMapper {
 	@Results({ @Result(property = "id", column = "id", id = true),
 			@Result(property = "subMenus", many = @Many(select = "selectAllMenus"), column = "id") })
@@ -37,4 +40,10 @@ public interface CsfMapper {
 	@Results({ @Result(property = "count", column = "count(*)") })
 	@Select("select count(*),type from article group by type order by count(*) desc")
 	List<Tag> selectAllTags();
+
+	@Select("select * from article order by comment desc limit 0,5")
+	List<Article> selectCommentArticles();
+
+	@Select("select * from link")
+	List<Link> selectAllLinks();
 }

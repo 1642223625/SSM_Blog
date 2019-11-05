@@ -1,6 +1,9 @@
 package com.ssm.pojo;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer menu_id;
 	private String type;
