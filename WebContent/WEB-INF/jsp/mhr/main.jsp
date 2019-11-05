@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -48,7 +49,7 @@
 							</div></li>
 						<li class="nav-item mydropdown"><a class="nav-link" href="#">技术杂谈</a>
 							<div class="mydropdown-content">
-								<a class="nav-link" href="#">C/C++</a> <a class="nav-link"
+								<a class="nav-link" href="#">C/CPP</a> <a class="nav-link"
 									href="#">Java</a> <a class="nav-link" href="#">PHP</a> <a
 									class="nav-link" href="#">HTML</a> <a class="nav-link" href="#">Python</a>
 								<a class="nav-link" href="#">JS</a> <a class="nav-link" href="#">Other</a>
@@ -174,8 +175,9 @@
 				<div class="d-flex flex-wrap">
 					<c:forEach items="${articleDates}" var="date">
 						<div class="p-2 width-165">
-							<a href="main?date=${date}"
-								<c:if test="${date eq pageInfo.date}">style="color: red;"</c:if>>${date}</a>
+							<a
+								href="main?date=${date}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if>"
+								<c:if test="${date == pageInfo.date}">style="color: red;"</c:if>>${date}</a>
 						</div>
 					</c:forEach>
 				</div>
@@ -210,8 +212,9 @@
 				<div class="d-flex flex-wrap">
 					<c:forEach items="${tags}" var="tag">
 						<div class="p-2 width-165">
-							<a href="main?type=${tag.type}"
-								<c:if test="${type eq pageInfo.type}">style="color: red;"</c:if>>${tag.type}</a>
+							<a
+								href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
+								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
 						</div>
 					</c:forEach>
 				</div>

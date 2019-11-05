@@ -37,7 +37,7 @@ public class CsfServiceImpl implements CsfService {
 	@Override
 	public PageInfo selectArticles(PageInfo pageInfo) {
 		pageInfo.setRowStart((pageInfo.getPageNumber() - 1) * pageInfo.getPageSize());
-		int articleCount = csfMapper.selectTableCount("article");
+		int articleCount = csfMapper.selectArticleCount(pageInfo);
 		pageInfo.setTotalPage(articleCount % pageInfo.getPageSize() == 0 ? articleCount / pageInfo.getPageSize()
 				: articleCount / pageInfo.getPageSize() + 1);
 		pageInfo.setList(csfMapper.selectArticles(pageInfo));

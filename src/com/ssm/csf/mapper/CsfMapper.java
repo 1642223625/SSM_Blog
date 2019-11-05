@@ -25,8 +25,9 @@ public interface CsfMapper {
 	@Select("select count(*) from ${tableName}")
 	Integer selectTableCount(@Param("tableName") String tableName);
 
-	@Select("select * from article order by detailDate desc limit #{rowStart},#{pageSize}")
 	List<Article> selectArticles(PageInfo pageInfo);
+
+	Integer selectArticleCount(PageInfo pageInfo);
 
 	@Select("select * from article where id=#{id}")
 	Article selectArticleById(int id);
