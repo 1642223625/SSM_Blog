@@ -35,8 +35,8 @@ public class MhrController {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("collect", csfService.selectCollectArticles());
 		request.setAttribute("comment", csfService.selectCommentArticles());
-		request.setAttribute("articleDates", csfService.selectAllArticleDate());
-		request.setAttribute("tags", csfService.selectAllTags());
+		request.setAttribute("articleDates", csfService.selectAllArticleDate(pageInfo));
+		request.setAttribute("tags", csfService.selectAllTags(pageInfo));
 		request.setAttribute("links", csfService.selectAllLinks());
 		return "mhr/main";
 	}

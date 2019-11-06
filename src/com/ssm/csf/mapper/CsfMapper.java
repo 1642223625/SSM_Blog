@@ -32,15 +32,12 @@ public interface CsfMapper {
 	@Select("select * from article where id=#{id}")
 	Article selectArticleById(int id);
 
-	@Select("select distinct date from article")
-	List<String> selectAllArticleDate();
+	List<String> selectAllArticleDate(PageInfo pageInfo);
 
 	@Select("select * from article order by collect desc limit 0,5")
 	List<Article> selectCollectArticles();
 
-	@Results({ @Result(property = "count", column = "count(*)") })
-	@Select("select count(*),type from article group by type order by count(*) desc")
-	List<Tag> selectAllTags();
+	List<Tag> selectAllTags(PageInfo pageInfo);
 
 	@Select("select * from article order by comment desc limit 0,5")
 	List<Article> selectCommentArticles();

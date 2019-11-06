@@ -45,8 +45,8 @@ public class CsfServiceImpl implements CsfService {
 	}
 
 	@Override
-	public List<String> selectAllArticleDate() {
-		return csfMapper.selectAllArticleDate();
+	public List<String> selectAllArticleDate(PageInfo pageInfo) {
+		return csfMapper.selectAllArticleDate(pageInfo);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class CsfServiceImpl implements CsfService {
 	}
 
 	@Override
-	public List<Tag> selectAllTags() {
-		return csfMapper.selectAllTags();
+	public List<Tag> selectAllTags(PageInfo pageInfo) {
+		return csfMapper.selectAllTags(pageInfo);
 	}
 
 	@Override

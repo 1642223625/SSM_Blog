@@ -59,7 +59,7 @@ public class CsfController {
 
 	@RequestMapping("getArticleDate")
 	public String getArticleDate(HttpServletRequest request) {
-		request.setAttribute("articleDate", csfService.selectAllArticleDate());
+		request.setAttribute("articleDate", csfService.selectAllArticleDate(new PageInfo()));
 		return "csf/articleDate";
 	}
 
@@ -71,7 +71,7 @@ public class CsfController {
 
 	@RequestMapping("tags")
 	public String tags(HttpServletRequest request) {
-		request.setAttribute("tags", csfService.selectAllTags());
+		request.setAttribute("tags", csfService.selectAllTags(new PageInfo()));
 		return "csf/tag";
 	}
 

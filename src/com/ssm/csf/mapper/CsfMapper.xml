@@ -28,4 +28,32 @@
 			</if>
 		</where>
 	</select>
+	<select id="selectAllArticleDate" parameterType="pageInfo"
+		resultType="string">
+		select distinct date from article
+		<where>
+			<if test="type != null">
+				type = #{type}
+			</if>
+			<if test="date != null">
+				AND date = #{date}
+			</if>
+		</where>
+	</select>
+	<resultMap type="tag" id="tags">
+		<result property="count" column="count(*)" />
+	</resultMap>
+	<select id="selectAllTags" parameterType="pageInfo"
+		resultMap="tags">
+		select count(*),type from article
+		<where>
+			<if test="type != null">
+				type = #{type}
+			</if>
+			<if test="date != null">
+				AND date = #{date}
+			</if>
+		</where>
+		group by type order by count(*) desc
+	</select>
 </mapper>

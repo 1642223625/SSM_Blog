@@ -39,7 +39,7 @@ public interface CsfService {
 	 * 
 	 * @return
 	 */
-	List<String> selectAllArticleDate();
+	List<String> selectAllArticleDate(PageInfo pageInfo);
 
 	/**
 	 * 查询最受欢迎的前五条文章，以收藏数为依据
@@ -53,7 +53,7 @@ public interface CsfService {
 	 * 
 	 * @return
 	 */
-	List<Tag> selectAllTags();
+	List<Tag> selectAllTags(PageInfo pageInfo);
 
 	/**
 	 * 查询评论最多的前五条文章
