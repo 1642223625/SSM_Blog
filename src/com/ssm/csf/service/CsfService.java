@@ -27,7 +27,7 @@ public interface CsfService {
 	Integer selectTableCount(String tableName);
 
 	/**
-	 * 分页查询文章的所有信息
+	 * 分页查询所有的文章信息，一次返回十条记录数
 	 * 
 	 * @param pageInfo
 	 * @return
@@ -35,22 +35,24 @@ public interface CsfService {
 	PageInfo selectArticles(PageInfo pageInfo);
 
 	/**
-	 * 查询所有文章的粗略信息，仅包含年份+月份信息，内部已去重
+	 * 根据条件，查询所有文章的粗略时间字段，仅包含年份+月份信息，内部已去重
 	 * 
+	 * @param pageInfo
 	 * @return
 	 */
 	List<String> selectAllArticleDate(PageInfo pageInfo);
 
 	/**
-	 * 查询最受欢迎的前五条文章，以收藏数为依据
+	 * 查询最受欢迎的前五条文章，以收藏总数进行排序
 	 * 
 	 * @return
 	 */
 	List<Article> selectCollectArticles();
 
 	/**
-	 * 查询所有的标签，并按照总数从大到小排序
+	 * 根据条件，查询所有的标签，并按照总数从大到小排序
 	 * 
+	 * @param pageInfo
 	 * @return
 	 */
 	List<Tag> selectAllTags(PageInfo pageInfo);

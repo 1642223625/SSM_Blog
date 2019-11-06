@@ -25,7 +25,6 @@ public class MhrController {
 		PageInfo pageInfo = new PageInfo();
 		pageInfo.setType(request.getParameter("type"));
 		pageInfo.setDate(request.getParameter("date"));
-		System.out.println("type:" + pageInfo.getType() + "\tdate" + pageInfo.getDate());
 		if (pageNumberStr != null) {
 			pageInfo.setPageNumber(Integer.parseInt(pageNumberStr));
 		}
