@@ -11,7 +11,7 @@
  Target Server Version : 50562
  File Encoding         : 65001
 
- Date: 05/11/2019 17:38:15
+ Date: 07/11/2019 16:18:47
 */
 
 SET NAMES utf8mb4;
@@ -32,26 +32,26 @@ CREATE TABLE `article`  (
   `browse` int(10) NULL DEFAULT NULL COMMENT '浏览量',
   `comment` int(10) NULL DEFAULT NULL COMMENT '评论数',
   `collect` int(10) NULL DEFAULT NULL COMMENT '喜欢',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '论文内容',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '论文内容',
+  `htmlContent` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '论文内容，带HTML标签',
   `picUri` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题图片Uri',
-  `uri` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '网页相对路径',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES (1, 13, 'Java', 'Java从入门到精通', 'Mango', '2019年十月', '2019-10-20 17:00', 100, 100, 100, '这是博文内容', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (2, 15, 'HTML', 'HTML开发指南', 'Mango', '2019年十一月', '2019-11-05 10:20', 200, 200, 200, '这也是博文内容', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (3, 18, 'Other', '知识付费的发展趋势', 'Mango', '2019年十月', '2019-10-10 14:00', 300, 300, 300, '这还是博文内容', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (4, 18, 'Other', '谈一谈博客的关注解锁文章功能', 'Mango', '2019年十一月', '2019-11-10 18:00', 400, 400, 400, '哈哈，博文内容', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (5, 16, 'Python', 'ADSL 拨号代理', 'Mango', '2019年十月', '2019-10-20 13:30', 150, 150, 150, 'Emmmm', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (6, 19, '爬虫', '爬虫工程师最想要的JS逆向教程', 'Mango', '2019年十一月', '2019-11-19 09:50', 350, 350, 350, 'Emmmm', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (7, 12, 'C/C++', 'OpenGL绘图学习总结', 'Mango', '2016年二月', '2016-02-11 21:00', 100, 100, 100, 'Emmmm', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (8, 14, 'PHP', 'WordPress远程附件上传', 'Mango', '2017年三月', '2017-03-12 08:00', 300, 300, 300, 'Emmmm', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (9, 20, 'Linux', '关于Ubuntu开机问题', 'Mango', '2015年十一月', '2015-11-13 16:00', 450, 450, 450, 'Emmmm', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (10, 21, 'CSS', '利用Sass自动生成padding和margin边距样式', 'Mango', '2016年十月', '2016-10-29 22:00', 550, 550, 550, '哈哈哈哈哈哈', 'block.jpg', NULL);
-INSERT INTO `article` VALUES (11, 22, 'Bootstrap', 'Bootstrap提取并编译Flexbox Grid系统', 'Mango', '2016年十月', '2016-10-29 19:00', 600, 600, 600, '嘿嘿嘿', 'block.jpg', NULL);
+INSERT INTO `article` VALUES (1, 13, 'Java', 'Java从入门到精通', 'Mango', '2019年10月', '2019-10-20 17:00', 100, 100, 100, '这是博文内容', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (2, 15, 'HTML', 'HTML开发指南', 'Mango', '2019年11月', '2019-11-05 10:20', 200, 200, 200, '这也是博文内容', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (3, 18, 'Other', '知识付费的发展趋势', 'Mango', '2019年10月', '2019-10-10 14:00', 300, 300, 300, '这还是博文内容', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (4, 18, 'Other', '谈一谈博客的关注解锁文章功能', 'Mango', '2019年09月', '2019-11-07 16:13:03', 400, 400, 400, 'asdiofhaosidnfa', '<p></p><pre><code>asdiofhaosidnfa</code></pre><p><br></p>', 'block.jpg');
+INSERT INTO `article` VALUES (5, 16, 'Python', 'ADSL 拨号代理', 'Mango', '2019年10月', '2019-10-20 13:30', 150, 150, 150, 'Emmmm', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (6, 19, '爬虫', '爬虫工程师最想要的JS逆向教程', 'Mango', '2019年11月', '2019-11-19 09:50', 350, 350, 350, 'Emmmm', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (7, 12, 'C/CPP', 'OpenGL绘图学习总结', 'Mango', '2016年02月', '2016-02-11 21:00', 100, 100, 100, 'Emmmm', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (8, 14, 'PHP', 'WordPress远程附件上传', 'Mango', '2017年03月', '2017-03-12 08:00', 300, 300, 300, 'Emmmm', NULL, 'block.jpg');
+INSERT INTO `article` VALUES (9, 20, 'Linux', '关于Ubuntu开机问题', 'Mango', '2019年11月', '2019-11-07 16:05:00', 450, 450, 450, '标题加粗大小宋体微软雅黑斜体下划线删除线', '<h1>标题</h1><p><span style=\"font-weight: bold;\">加粗</span></p><p><span style=\"font-size: xx-large;\">大</span><span style=\"font-weight: bold;\"><br></span></p><p><span style=\"font-size: x-small;\">小</span></p><p><span style=\"font-family: 宋体;\">宋体</span></p><p><span style=\"font-family: 微软雅黑;\">微软雅黑</span></p><p><span style=\"font-style: italic;\">斜体</span></p><p><span style=\"text-decoration-line: underline;\">下划线</span></p><p><span style=\"text-decoration-line: line-through;\">删除线</span></p>', 'block.jpg');
+INSERT INTO `article` VALUES (10, 21, 'CSS', '利用Sass自动生成padding和margin边距样式', 'Mango', '2019年11月', '2019-11-07 16:12:41', 550, 550, 550, '&nbsp;12&nbsp;', '<p></p><p></p><p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png\" alt=\"[坏笑]\" data-w-e=\"1\"><br></p><p></p><p><img src=\"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1411728850,1869975885&amp;fm=26&amp;gp=0.jpg\" style=\"max-width:100%;\"><br></p><table border=\"0\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><th>&nbsp;1</th><th>2&nbsp;</th></tr></tbody></table><p><br></p>', 'block.jpg');
+INSERT INTO `article` VALUES (11, 22, 'Bootstrap', 'Bootstrap提取并编译Flexbox Grid系统', 'Mango', '2019年11月', '2019-11-07 16:10:19', 600, 600, 600, '文字颜色背景颜色百度有序有序无序无序靠左居中靠右引用', '<p></p><p></p><p><span style=\"color: rgb(249, 150, 59);\">文字颜色</span></p><p><span style=\"background-color: rgb(139, 170, 74);\">背景颜色</span></p><p><a href=\"http://www.baidu.com\" target=\"_blank\">百度</a><br></p><ol><li>有序</li><li>有序</li></ol><ul><li>无序</li><li>无序</li></ul><p>靠左</p><p style=\"text-align: center;\">居中</p><p style=\"text-align: right;\">靠右</p><blockquote>引用</blockquote><p></p><p><br></p>', 'block.jpg');
 
 -- ----------------------------
 -- Table structure for link
@@ -131,7 +131,7 @@ INSERT INTO `menu` VALUES (8, '技术交流', 0);
 INSERT INTO `menu` VALUES (9, '个人随笔', 2);
 INSERT INTO `menu` VALUES (10, '个人日记', 2);
 INSERT INTO `menu` VALUES (11, '个人展示', 2);
-INSERT INTO `menu` VALUES (12, 'C/C++', 3);
+INSERT INTO `menu` VALUES (12, 'C/CPP', 3);
 INSERT INTO `menu` VALUES (13, 'Java', 3);
 INSERT INTO `menu` VALUES (14, 'PHP', 3);
 INSERT INTO `menu` VALUES (15, 'HTML', 3);

@@ -16,6 +16,8 @@ public interface CsfService {
 	 */
 	List<Menu> selectAllMenu();
 
+	List<Menu> selectAllTypes();
+
 	Article selectArticleById(int id);
 
 	/**
@@ -70,4 +72,20 @@ public interface CsfService {
 	 * @return
 	 */
 	List<Link> selectAllLinks();
+
+	/**
+	 * 根据传入的博文信息对博文进行更新
+	 * 
+	 * @param article
+	 * @return
+	 */
+	Integer updateArticle(Article article);
+
+	/**
+	 * 根据传入的id查找对应文章的图片
+	 * 
+	 * @param id
+	 * @return
+	 */
+	String selectPicUriById(int id);
 }

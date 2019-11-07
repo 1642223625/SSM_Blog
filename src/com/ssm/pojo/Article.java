@@ -2,7 +2,7 @@ package com.ssm.pojo;
 
 import java.io.Serializable;
 
-public class Article implements Serializable{
+public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer menu_id;
@@ -15,7 +15,8 @@ public class Article implements Serializable{
 	private Integer comment;
 	private Integer collect;
 	private String content;
-	private String picUri;
+	private String HTMLContent;
+	private String picUri = "block.jpg";
 
 	public Integer getId() {
 		return id;
@@ -103,6 +104,14 @@ public class Article implements Serializable{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getHTMLContent() {
+		return HTMLContent;
+	}
+
+	public void setHTMLContent(String hTMLContent) {
+		HTMLContent = hTMLContent;
 	}
 
 	public String getPicUri() {

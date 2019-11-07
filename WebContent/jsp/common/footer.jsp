@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<div>${content}</div>
+	<footer class="footer d-flex flex-wrap align-content-center mt-2">
+		<div class="p-2 text-white w-100 text-center">河南大学2019年大三Javaweb大作业</div>
+	</footer>
 </body>
 </html>

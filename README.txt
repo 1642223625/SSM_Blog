@@ -26,3 +26,6 @@ insert into test values(default,"王五","");
 选择运行SQL文件
 在文件中找到blog.sql文件
 点击开始即可
+
+博文图片如果显示不全，则现在数据库执行以下语句恢复默认图片
+update article set picUri='block.jpg'

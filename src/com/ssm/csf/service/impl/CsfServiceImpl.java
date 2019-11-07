@@ -23,6 +23,11 @@ public class CsfServiceImpl implements CsfService {
 	public List<Menu> selectAllMenu() {
 		return csfMapper.selectAllMenus(0);
 	}
+	
+	@Override
+	public List<Menu> selectAllTypes(){
+		return csfMapper.selectAllMenus(3);
+	}
 
 	@Override
 	public Article selectArticleById(int id) {
@@ -67,6 +72,16 @@ public class CsfServiceImpl implements CsfService {
 	@Override
 	public List<Link> selectAllLinks() {
 		return csfMapper.selectAllLinks();
+	}
+
+	@Override
+	public Integer updateArticle(Article article) {
+		return csfMapper.updateArticle(article);
+	}
+
+	@Override
+	public String selectPicUriById(int id) {
+		return csfMapper.selectPicUriById(id);
 	}
 
 }

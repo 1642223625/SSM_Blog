@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.ssm.pojo.Article;
 import com.ssm.pojo.Link;
@@ -44,4 +45,11 @@ public interface CsfMapper {
 
 	@Select("select * from link")
 	List<Link> selectAllLinks();
+
+	@Update("update article set menu_id=#{menu_id},type=#{type},title=#{title},author=#{author},date=#{date},"
+			+ "detailDate=#{detailDate},content=#{content},htmlContent=#{HTMLContent},picUri=#{picUri} where id=#{id}")
+	Integer updateArticle(Article article);
+
+	@Select("select picUri from article where id=#{id}")
+	String selectPicUriById(int id);
 }

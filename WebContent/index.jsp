@@ -8,13 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <base href="<%=basePath%>">
-<title>Insert title here</title>
+<title>索引页</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <script type="text/javascript" src="js/javascript.js"></script>
 </head>
 <%
-	request.getRequestDispatcher("/main").forward(request, response);
+	//跳转到main控制器，位于mhr的控制器类中
+	request.getRequestDispatcher("main").forward(request, response);
 %>
 <!-- 
 <body>

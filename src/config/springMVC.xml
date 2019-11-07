@@ -15,12 +15,13 @@
 	<!-- 静态资源配置 -->
 	<mvc:resources location="/js/" mapping="/js/**"/>
 	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/temp/" mapping="/temp/**"/>
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
-	<mvc:resources location="/images/" mapping="/images/**"/>
 	<mvc:resources location="/files/" mapping="/files/**"/>
+	<mvc:resources location="/images/" mapping="/images/**"/>
 	<!-- 视图解析器 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="prefix" value="/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	<!-- Multipart配置 -->
