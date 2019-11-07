@@ -57,6 +57,18 @@ public class CsfController {
 		return "csf/singleArticle";
 	}
 
+	@RequestMapping("editArticle")
+	public String editArticle(HttpServletRequest request) {
+		int article_id = 1;
+		String article_idStr = request.getParameter("id");
+		if (article_idStr != null) {
+			article_id = Integer.parseInt(article_idStr);
+		}
+		Article article = csfService.selectArticleById(article_id);
+		request.setAttribute("article", article);
+		return "csf/editArticle";
+	}
+
 	@RequestMapping("getArticleDate")
 	public String getArticleDate(HttpServletRequest request) {
 		request.setAttribute("articleDate", csfService.selectAllArticleDate(new PageInfo()));
@@ -85,5 +97,12 @@ public class CsfController {
 	public String links(HttpServletRequest request) {
 		request.setAttribute("links", csfService.selectAllLinks());
 		return "csf/links";
+	}
+
+	@RequestMapping("saveContent")
+	public String saveContent(HttpServletRequest request) {
+		//System.out.println(request.getParameter("content"));
+		request.setAttribute("content", request.getParameter("content"));
+		return "csf/showContent";
 	}
 }

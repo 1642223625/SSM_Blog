@@ -161,9 +161,6 @@
 						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
 						class="page-link"
 						href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a></li>
-					<c:if test="${pageInfo.date!=null or pageInfo.type!=null}">
-						<li class="page-item"><a class="page-link" href="main">清除筛选条件</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -179,6 +176,12 @@
 								<c:if test="${date == pageInfo.date}">style="color: red;"</c:if>>${date}</a>
 						</div>
 					</c:forEach>
+					<c:if test="${pageInfo.date!=null}">
+						<div class="p-2 center-block" style="width: 300px">
+							<a class="btn btn-sm mybutton"
+								href="main<c:if test="${pageInfo.type!=null}">?type=${pageInfo.type}</c:if>">清除日期筛选条件</a>
+						</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="block">
@@ -192,6 +195,12 @@
 								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
 						</div>
 					</c:forEach>
+					<c:if test="${pageInfo.type!=null}">
+						<div class="p-2 center-block" style="width: 300px">
+							<a class="btn btn-sm mybutton"
+								href="main<c:if test="${pageInfo.date!=null}">?date=${pageInfo.date}</c:if>">清除类型筛选条件</a>
+						</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="block">
@@ -204,7 +213,8 @@
 								alt="img">
 						</div>
 						<div class="p-1">
-							<a href="csf/singleArticle?id=${article.id}">${article.title}</a>
+							<%-- <a href="csf/singleArticle?id=${article.id}">${article.title}</a> --%>
+							<a href="csf/editArticle?id=${article.id}">${article.title}</a>
 						</div>
 					</div>
 					<div class="d-flex flex-row-reverse"

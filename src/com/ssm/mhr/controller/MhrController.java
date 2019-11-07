@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssm.csf.service.CsfService;
+import com.ssm.csf.util.CSFUtil;
 import com.ssm.mhr.service.MhrService;
 import com.ssm.pojo.PageInfo;
 
@@ -21,6 +22,7 @@ public class MhrController {
 
 	@RequestMapping("main")
 	public String main(HttpServletRequest request) {
+		CSFUtil.setMenu(request, csfService);// 设置菜单
 		String pageNumberStr = request.getParameter("pageNumber");
 		PageInfo pageInfo = new PageInfo();
 		pageInfo.setType(request.getParameter("type"));
