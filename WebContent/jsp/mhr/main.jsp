@@ -32,7 +32,7 @@
 		<div class="coontent-wrap">
 			<div class="content">
 				<c:if test="${pageInfo.type==null and pageInfo.date==null}">
-					<div class="carousel slide mt-3" data-ride="carousel">
+					<div id="demo" class="carousel slide mt-3" data-ride="carousel">
 						<!-- 指示符 -->
 						<ul class="carousel-indicators">
 							<li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -58,7 +58,8 @@
 						<!-- 左右切换按钮 -->
 						<a class="carousel-control-prev" href="#demo" data-slide="prev">
 							<span class="carousel-control-prev-icon"></span>
-						</a> <a class="carousel-control-next" href="#demo" data-slide="next">
+						</a>
+						<a class="carousel-control-next" href="#demo" data-slide="next">
 							<span class="carousel-control-next-icon"></span>
 						</a>
 					</div>
@@ -70,9 +71,10 @@
 								<div class="p-2">
 									<span class="mybutton">${status.count}</span>
 								</div>
-								<div class="p-2">
-									<a href="csf/showArticleContent?id=${article.id}">${article.title}----<i
-										class="fa fa-heart"></i>${article.collect}</a>
+								<div class="p-2" style="width: 100%;">
+									<a href="csf/showArticleContent?id=${article.id}">${article.title}
+										<span class="float-right"><i class="fa fa-heart"></i>${article.collect}</span>
+									</a>
 								</div>
 							</div>
 						</c:forEach>
@@ -81,8 +83,8 @@
 				<c:forEach items="${pageInfo.list}" var="article">
 					<div class="block">
 						<div class="head">
-							<span class="type">${article.type}</span> <a class="title"
-								href="csf/showArticleContent?id=${article.id}">${article.title}</a>
+							<span class="type">${article.type}</span>
+							<a class="title" href="csf/showArticleContent?id=${article.id}">${article.title}</a>
 						</div>
 						<div class="d-flex flex-row">
 							<div class="p-2">
@@ -95,19 +97,24 @@
 						</div>
 						<div class="d-flex flex-row-reverse" style="margin-top: -20px;">
 							<div class="p-2">
-								<i class="fa fa-heart"></i> ${article.collect}
+								<i class="fa fa-heart"></i>
+								${article.collect}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-comments"></i> ${article.comment}
+								<i class="fa fa-comments"></i>
+								${article.comment}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-eye"></i> ${article.browse}
+								<i class="fa fa-eye"></i>
+								${article.browse}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-clock-o"></i> ${article.detailDate}
+								<i class="fa fa-clock-o"></i>
+								${article.detailDate}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-user"></i> ${article.author}
+								<i class="fa fa-user"></i>
+								${article.author}
 							</div>
 						</div>
 					</div>
@@ -115,96 +122,22 @@
 				<ul class="pagination">
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==1}">disabled</c:if>"><a
-						class="page-link"
-						href="main?pageNumber=${pageInfo.pageNumber-1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">上一页</a></li>
+							class="page-link"
+							href="main?pageNumber=${pageInfo.pageNumber-1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">上一页</a></li>
 					<c:forEach items="${pageCount}" varStatus="status">
 						<li
 							class="page-item <c:if test="${pageInfo.pageNumber==status.count}">active</c:if>"><a
-							class="page-link"
-							href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a></li>
+								class="page-link"
+								href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a></li>
 					</c:forEach>
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
-						class="page-link"
-						href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a></li>
+							class="page-link"
+							href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="aside">
-			<div class="block">
-				<span>文章归档</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${articleDates}" var="date">
-						<div class="p-2 width-165">
-							<a
-								href="main?date=${date}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if>"
-								<c:if test="${date == pageInfo.date}">style="color: red;"</c:if>>${date}</a>
-						</div>
-					</c:forEach>
-					<c:if test="${pageInfo.date!=null}">
-						<div class="p-2 center-block" style="width: 300px">
-							<a class="btn btn-sm mybutton"
-								href="main<c:if test="${pageInfo.type!=null}">?type=${pageInfo.type}</c:if>">清除日期筛选条件</a>
-						</div>
-					</c:if>
-				</div>
-			</div>
-			<div class="block">
-				<span>标签云</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${tags}" var="tag">
-						<div class="p-2 width-165">
-							<a
-								href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
-								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
-						</div>
-					</c:forEach>
-					<c:if test="${pageInfo.type!=null}">
-						<div class="p-2 center-block" style="width: 300px">
-							<a class="btn btn-sm mybutton"
-								href="main<c:if test="${pageInfo.date!=null}">?date=${pageInfo.date}</c:if>">清除类型筛选条件</a>
-						</div>
-					</c:if>
-				</div>
-			</div>
-			<div class="block">
-				<span>猜你喜欢</span>
-				<c:forEach items="${comment}" var="article">
-					<hr>
-					<div class="d-flex">
-						<div class="p-2">
-							<img width="99px" height="66px" src="images/${article.picUri}"
-								alt="img">
-						</div>
-						<div class="p-1">
-							<a href="csf/showArticleContent?id=${article.id}">${article.title}</a>
-						</div>
-					</div>
-					<div class="d-flex flex-row-reverse"
-						style="margin-top: -34px; font-size: 10px;">
-						<div class="p-2">
-							<i class="fa fa-comments"></i>${article.comment}
-						</div>
-						<div class="p-2">
-							<i class="fa fa-clock-o"></i>${article.date}
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-			<div class="block">
-				<span>友情链接</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${links}" var="link">
-						<div class="p-2 width-165" style="text-align: center;">
-							<a href="${link.url}">${link.name}</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="../common/aside.jsp"></jsp:include>
 		<div class="clear"></div>
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>

@@ -23,9 +23,9 @@ public class CsfServiceImpl implements CsfService {
 	public List<Menu> selectAllMenu() {
 		return csfMapper.selectAllMenus(0);
 	}
-	
+
 	@Override
-	public List<Menu> selectAllTypes(){
+	public List<Menu> selectAllTypes() {
 		return csfMapper.selectAllMenus(3);
 	}
 
@@ -80,8 +80,27 @@ public class CsfServiceImpl implements CsfService {
 	}
 
 	@Override
+	public Integer insertNewArticle(Article article) {
+		return csfMapper.insertNewArticle(article);
+	}
+
+	@Override
 	public String selectPicUriById(int id) {
 		return csfMapper.selectPicUriById(id);
 	}
 
+	@Override
+	public Integer updateBrowse(int article_id, int browse) {
+		return csfMapper.updateBrowse(article_id, browse);
+	}
+
+	@Override
+	public Integer updateComment(int article_id, int comment) {
+		return csfMapper.updateComment(article_id, comment);
+	}
+
+	@Override
+	public Integer updateCollect(int article_id, int collect) {
+		return csfMapper.updateCollect(article_id, collect);
+	}
 }

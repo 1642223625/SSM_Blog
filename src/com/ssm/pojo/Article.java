@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private Integer id = 0;// 该默认id不会最终传入数据库
 	private Integer menu_id;
 	private String type;
 	private String title;
 	private String author;
 	private String date;
 	private String detailDate;
-	private Integer browse;
-	private Integer comment;
-	private Integer collect;
+	private Integer browse = 0;
+	private Integer comment = 0;
+	private Integer collect = 0;
 	private String content;
 	private String HTMLContent;
 	private String picUri = "block.jpg";

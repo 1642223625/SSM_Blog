@@ -22,7 +22,7 @@ import com.ssm.pojo.PageInfo;
 public class CSFUtil {
 	private static Logger logger = Logger.getLogger(CSFUtil.class);
 	private static DateFormat dateDF = new SimpleDateFormat("yyyy年MM月");
-	private static DateFormat detailDateDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static DateFormat detailDateDF = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 	public static String getDate(Date date) {
 		return dateDF.format(date);
@@ -83,5 +83,27 @@ public class CSFUtil {
 		request.setAttribute("pageInfo", pageInfo);
 		Integer[] pageCount = new Integer[pageInfo.getTotalPage()];// 该空数组只用于页码个数的迭代显示
 		request.setAttribute("pageCount", pageCount);
+	}
+
+	public static String trimPLabel(String content) {// 去除首尾多余的<p></p>和<p><br></p>
+		String pLabel1 = "<p></p>";
+		String pLabel2 = "<p><br></p>";
+		int start = 0, end = 0;
+		while (content.startsWith(pLabel1) || content.startsWith(pLabel2) || content.endsWith(pLabel1)
+				|| content.endsWith(pLabel2)) {
+			if (content.startsWith(pLabel1)) {
+				start += pLabel1.length();
+			} else if (content.startsWith(pLabel2)) {
+				start += pLabel2.length();
+			}
+			if (content.endsWith(pLabel2)) {
+				end += pLabel2.length();
+			} else if (content.endsWith(pLabel1)) {
+				end += pLabel1.length();
+			}
+			content = content.substring(start, content.length() - end);
+			start = end = 0;
+		}
+		return content;
 	}
 }

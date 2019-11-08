@@ -3,7 +3,7 @@ package com.ssm.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class Menu implements Serializable{
+public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;

@@ -3,8 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.csf.mapper.CsfMapper">
+	<resultMap type="article" id="articles">
+		<id property="id" column="id" />
+		<association property="comment"
+			select="selectCountComment" column="id" />
+	</resultMap>
 	<select id="selectArticles" parameterType="pageInfo"
-		resultType="article">
+		resultMap="articles">
 		select * from article
 		<where>
 			<if test="type != null">

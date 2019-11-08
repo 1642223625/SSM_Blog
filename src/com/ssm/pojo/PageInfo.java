@@ -3,7 +3,7 @@ package com.ssm.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class PageInfo implements Serializable{
+public class PageInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer pageNumber = 1;// 默认第一页
 	private Integer rowStart;

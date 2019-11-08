@@ -17,7 +17,6 @@
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <style>
-/* Make the image fully responsive */
 .carousel-inner img {
 	width: 100%;
 	height: 100%;
@@ -25,9 +24,8 @@
 </style>
 <script type="text/javascript">
 	function setContent() {
-		document.getElementById("content").value = editor.txt.text()
-		document.getElementById("HTMLContent").value = editor.txt.html()
-		document.getElementById("picUri").value = $("#img").attr("src")
+		$("#HTMLContent").val(editor.txt.html());
+		$("#picUri").val($("#showImg").attr("src"));
 		return true;
 	}
 	function uploadPic() {
@@ -40,7 +38,8 @@
 			data : formData,
 			processData : false,
 			success : function(res) {
-				$("#img").attr("src", "temp/" + res)
+				//设置图片URL，暂存于临时存储区中
+				$("#showImg").attr("src", "temp/" + res)
 			},
 			error : function() {
 				alert("请求出错");
@@ -56,31 +55,58 @@
 		<div class="coontent-wrap">
 			<div class="content">
 				<div class="block">
+					<!-- 该表格组件用于异步上传图片 -->
 					<form id="articleForm" enctype="multipart/form-data">
-						设置博文图片：<input type="file" id="pic" name="picFile" />
-						<button onclick="return uploadPic()">上传</button>
+						<input style="display: none;" type="file" id="pic" name="picFile" />
 					</form>
-					<hr>
-					<form action="csf/saveContent" method="post">
-						<input type="hidden" name="id" value="${article.id}" /> <input
-							type="hidden" name="browse" value="${article.browse}" /> <input
-							type="hidden" name="comment" value="${article.comment}" /> <input
-							type="hidden" name="collect" value="${article.collect}" /> <input
-							type="hidden" name="content" id="content" /> <input type="hidden"
-							name="HTMLContent" id="HTMLContent" /> <input type="hidden"
-							name="picUri" id="picUri" /> 标题：<input name="title"
-							value="${article.title}" size="70"/><br /> 作者：<input name="author"
-							value="${article.author}" size="70"/><br /> 博文类型：<select
-							name="menuId_Type">
-							<c:forEach items="${types}" var="type">
-								<c:if test="${type.belong==3}">
-									<option value="${type.id}-${type.name}"
-										<c:if test="${type.id eq article.menu_id}">selected</c:if>>${type.name}</option>
-								</c:if>
-							</c:forEach>
-						</select> <br /> 当前的博文显示图片为：<img id="img" width="99px" height="66px"
-							alt="图片加载失败，请重试。注意：上传文件不要过大" src="images/${article.picUri}" />
+					<!-- 该表格组件用于获取博文相关信息 -->
+					<form action="csf/updateArticle?add=${add}" method="post">
+						<input type="hidden" name="id" value="${article.id}" />
+						<input type="hidden" name="browse" value="${article.browse}" />
+						<input type="hidden" name="comment" value="${article.comment}" />
+						<input type="hidden" name="collect" value="${article.collect}" />
+						<input type="hidden" name="HTMLContent" id="HTMLContent" />
+						<input type="hidden" name="picUri" id="picUri" />
+						<label>
+							标题：
+							<input name="title" value="${article.title}" size="70" />
+						</label>
+						<br />
+						<label>
+							作者：
+							<input name="author" value="${article.author}" size="70" />
+						</label>
+						<br />
+						<label>
+							博文类型：
+							<select name="menuId_Type">
+								<c:forEach items="${types}" var="type">
+									<c:if test="${type.belong==3}">
+										<!-- 每个选项中存储了该选项对应的类型id和类型值 -->
+										<option value="${type.id}-${type.name}"
+											<c:if test="${type.id eq article.menu_id}">selected</c:if>>${type.name}</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</label>
+						<br />
+						<label>
+							当前的博文显示图片为：<img id="showImg" width="99px" height="66px"
+								alt="图片加载失败，请重试。注意：上传文件不要过大" src="images/${article.picUri}" />
+						</label>
+						<br />
+						<label for="pic">
+							设置博文图片：<span class="btn btn-sm btn-primary">请选择</span>
+						</label>
+						<button class="btn btn-sm btn-primary"
+							onclick="return uploadPic()">上传</button>
+						<label>
+							博文简介：
+							<textarea name="content" cols="80" rows="5" class="float-right">${article.content}</textarea>
+						</label>
+						<br />
 						<p>博文内容：</p>
+						<!-- 富文本组件---始 -->
 						<div id="editor">
 							<p>${article.HTMLContent}</p>
 						</div>
@@ -110,91 +136,20 @@
 							]
 							editor.create()
 						</script>
-						<input type="submit" value="提交" class="btn btn-lg btn-primary"
-							onclick="return setContent()" />
+						<!-- 富文本组件---终-->
+						<p></p>
+						<center>
+							<input type="submit" value="提交" class="btn btn-lg btn-primary"
+								onclick="return setContent()" />
+						</center>
+						<hr>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="aside">
-			<div class="block">
-				<span>文章归档</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${articleDates}" var="date">
-						<div class="p-2 width-165">
-							<a
-								href="main?date=${date}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if>"
-								<c:if test="${date == pageInfo.date}">style="color: red;"</c:if>>${date}</a>
-						</div>
-					</c:forEach>
-					<c:if test="${pageInfo.date!=null}">
-						<div class="p-2 center-block" style="width: 300px">
-							<a class="btn btn-sm mybutton"
-								href="main<c:if test="${pageInfo.type!=null}">?type=${pageInfo.type}</c:if>">清除日期筛选条件</a>
-						</div>
-					</c:if>
-				</div>
-			</div>
-			<div class="block">
-				<span>标签云</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${tags}" var="tag">
-						<div class="p-2 width-165">
-							<a
-								href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
-								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
-						</div>
-					</c:forEach>
-					<c:if test="${pageInfo.type!=null}">
-						<div class="p-2 center-block" style="width: 300px">
-							<a class="btn btn-sm mybutton"
-								href="main<c:if test="${pageInfo.date!=null}">?date=${pageInfo.date}</c:if>">清除类型筛选条件</a>
-						</div>
-					</c:if>
-				</div>
-			</div>
-			<div class="block">
-				<span>猜你喜欢</span>
-				<c:forEach items="${comment}" var="article">
-					<hr>
-					<div class="d-flex">
-						<div class="p-2">
-							<img width="99px" height="66px" src="images/${article.picUri}"
-								alt="img">
-						</div>
-						<div class="p-1">
-							<a href="csf/showContent?id=${article.id}">${article.title}</a>
-						</div>
-					</div>
-					<div class="d-flex flex-row-reverse"
-						style="margin-top: -34px; font-size: 10px;">
-						<div class="p-2">
-							<i class="fa fa-comments"></i>${article.comment}
-						</div>
-						<div class="p-2">
-							<i class="fa fa-clock-o"></i>${article.date}
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-			<div class="block">
-				<span>友情链接</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${links}" var="link">
-						<div class="p-2 width-165" style="text-align: center;">
-							<a href="${link.url}">${link.name}</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="../common/aside.jsp"></jsp:include>
 		<div class="clear"></div>
 	</section>
-	<footer class="footer d-flex flex-wrap align-content-center mt-2">
-		<div class="p-2 text-white w-100 text-center">河南大学2019年大三Javaweb大作业</div>
-	</footer>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

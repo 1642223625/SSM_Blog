@@ -3,7 +3,6 @@ package com.ssm.csf.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ssm.csf.service.CsfService;
 import com.ssm.csf.util.CSFUtil;
 import com.ssm.pojo.Article;
-import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 
 @Controller
@@ -28,28 +26,7 @@ public class CsfController {
 	Logger logger = Logger.getLogger(getClass());
 	@Resource
 	private CsfService csfService;
-
-	@RequestMapping("menu")
-	public String menu(HttpServletRequest request) {
-		List<Menu> menus = csfService.selectAllMenu();
-		request.getServletContext().setAttribute("menus", menus);
-		request.setAttribute("menus", menus);
-		return "csf/menu";
-	}
-
-	@RequestMapping("articleByPage")
-	public String article(HttpServletRequest request) {
-		String pageNumberStr = request.getParameter("pageNumber");
-		PageInfo pageInfo = new PageInfo();
-		if (pageNumberStr != null) {
-			pageInfo.setPageNumber(Integer.parseInt(pageNumberStr));
-		}
-		csfService.selectArticles(pageInfo);
-		request.setAttribute("pageInfo", pageInfo);
-		Integer[] pageCount = new Integer[pageInfo.getTotalPage()];
-		request.setAttribute("pageCount", pageCount);
-		return "csf/article";
-	}
+	private static Article article;
 
 	@RequestMapping("showArticleContent")
 	public String singleArticle(HttpServletRequest request) {
@@ -58,12 +35,23 @@ public class CsfController {
 		if (article_idStr != null) {// 如果请求中的博文id不为空则设置为请求值
 			article_id = Integer.parseInt(article_idStr);
 		}
-		Article article = csfService.selectArticleById(article_id);
+		article = csfService.selectArticleById(article_id);
+		article.setHTMLContent(CSFUtil.trimPLabel(article.getHTMLContent()));
+		csfService.updateBrowse(article_id, article.getBrowse() + 1);// 更新浏览量加一
 		request.setAttribute("article", article);
 		// 设置文章的层级路径值
 		request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
 		return "csf/showArticleContent";
+	}
+
+	@RequestMapping("addNewArticle")
+	public String addNewArticle(HttpServletRequest request) {
+		request.setAttribute("article", new Article());
+		request.setAttribute("types", csfService.selectAllTypes());
+		request.setAttribute("add", "true");// 用于判断是否为新增的标志位
+		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
+		return "csf/editArticle";
 	}
 
 	@RequestMapping("editArticle")
@@ -75,48 +63,18 @@ public class CsfController {
 		}
 		request.setAttribute("article", csfService.selectArticleById(article_id));
 		request.setAttribute("types", csfService.selectAllTypes());
+		request.setAttribute("add", "false");// 用于判断是否为新增的标志位
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
 		return "csf/editArticle";
 	}
 
-	@RequestMapping("getArticleDate")
-	public String getArticleDate(HttpServletRequest request) {
-		request.setAttribute("articleDate", csfService.selectAllArticleDate(new PageInfo()));
-		return "csf/articleDate";
-	}
-
-	@RequestMapping("collectArticle")
-	public String collectArticle(HttpServletRequest request) {
-		request.setAttribute("collect", csfService.selectCollectArticles());
-		return "csf/collect";
-	}
-
-	@RequestMapping("tags")
-	public String tags(HttpServletRequest request) {
-		request.setAttribute("tags", csfService.selectAllTags(new PageInfo()));
-		return "csf/tag";
-	}
-
-	@RequestMapping("commentArticle")
-	public String commentArticle(HttpServletRequest request) {
-		request.setAttribute("comment", csfService.selectCommentArticles());
-		return "csf/comment";
-	}
-
-	@RequestMapping("links")
-	public String links(HttpServletRequest request) {
-		request.setAttribute("links", csfService.selectAllLinks());
-		return "csf/links";
-	}
-
-	@SuppressWarnings("deprecation")
-	@RequestMapping("saveContent")
+	@SuppressWarnings({ "deprecation" })
+	@RequestMapping("updateArticle")
 	public String saveContent(HttpServletRequest request) {
-		// System.out.println(request.getParameter("content"));
-		Article article = new Article();
+		article = new Article();
 		String menuId_Type = request.getParameter("menuId_Type");
 		String[] mt = menuId_Type.split("-");
-		String tempPicUri = request.getParameter("picUri");
+		String tempPicUri = request.getParameter("picUri");// 从编辑页中获取到的图片路径
 		article.setId(Integer.parseInt(request.getParameter("id")));
 		article.setMenu_id(Integer.parseInt(mt[0]));
 		article.setType(mt[1]);
@@ -129,18 +87,29 @@ public class CsfController {
 		article.setCollect(Integer.parseInt(request.getParameter("collect")));
 		article.setContent(request.getParameter("content"));
 		article.setHTMLContent(request.getParameter("HTMLContent"));
-		String picUri = csfService.selectPicUriById(article.getId());
-		if (!"block.jpg".equals(picUri)) {
-			new File(request.getRealPath("images/" + picUri)).delete();
+		if (tempPicUri.startsWith("temp/")) {// 在客户端修改过博文图片
+			String picUri = csfService.selectPicUriById(article.getId());
+			if (!"block.jpg".equals(picUri)) {// 如果原图片不是默认的图片，则删除原图片
+				new File(request.getRealPath("images/" + picUri)).delete();
+			}
+			picUri = tempPicUri.replace("temp/", "");// 获取暂存区中上传的文件名
+			CSFUtil.copyFile(request.getRealPath(tempPicUri), request.getRealPath("images/" + picUri));
+			new File(request.getRealPath(tempPicUri)).delete();// 删除暂存区中的文件
+			article.setPicUri(picUri);
+		} else {
+			article.setPicUri(tempPicUri.replace("images/", ""));// 去除路径，仅存文件名
 		}
-		picUri = tempPicUri.replace("temp/", "");
-		CSFUtil.copyFile(request.getRealPath(tempPicUri), request.getRealPath("images/" + picUri));
-		new File(request.getRealPath(tempPicUri)).delete();
-		article.setPicUri(picUri);
-		if (csfService.updateArticle(article) > 0) {
+		int result;
+		if ("true".equals(request.getParameter("add"))) {// 对新增还是更新标志位进行判断
+			result = csfService.insertNewArticle(article);
+		} else {
+			result = csfService.updateArticle(article);
+		}
+		if (result > 0) {
 			request.setAttribute("article", csfService.selectArticleById(article.getId()));
+			// 获取该博文对应类型的层级路径
 			request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
-			request.setAttribute("next", "main");
+			request.setAttribute("next", "main");// 设置下一次success页面中自动跳转的路径
 			return "csf/success";
 		} else {
 			return "csf/error";
@@ -159,14 +128,11 @@ public class CsfController {
 		try {
 			String suffix = fileName.substring(fileName.lastIndexOf('.'));// 获取文件后缀
 			fileName = UUID.randomUUID().toString() + suffix;// 随机定义文件名
-		} catch (Exception e) {
-		}
-		try {
 			FileUtils.copyInputStreamToFile(picFile.getInputStream(), new File(path, fileName));// 写入图片到服务器
-			return fileName;
+			return fileName;// 返回保存到暂存区的文件名
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
-		return "block.jpg";
+		return "block.jpg";// 返回默认的博文图片
 	}
 }

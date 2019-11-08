@@ -11,7 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>操作成功，<span id="num">5</span>秒后为你跳转主页</h1>
+	<h1>
+		操作成功，<span id="num">5</span>秒后为你跳转主页
+	</h1>
 	<script type="text/javascript">
 	setTimeout(function(){
 		location.href="http://localhost:8080/SSM_Blog/${next}"

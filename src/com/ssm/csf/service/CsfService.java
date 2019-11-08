@@ -16,6 +16,11 @@ public interface CsfService {
 	 */
 	List<Menu> selectAllMenu();
 
+	/**
+	 * 选择所有的博文类型
+	 * 
+	 * @return
+	 */
 	List<Menu> selectAllTypes();
 
 	Article selectArticleById(int id);
@@ -82,10 +87,45 @@ public interface CsfService {
 	Integer updateArticle(Article article);
 
 	/**
+	 * 根据传入的博文信息新增一条博文记录
+	 * 
+	 * @param article
+	 * @return
+	 */
+	Integer insertNewArticle(Article article);
+
+	/**
 	 * 根据传入的id查找对应文章的图片
 	 * 
 	 * @param id
 	 * @return
 	 */
 	String selectPicUriById(int id);
+
+	/**
+	 * 更新对应博文的浏览量
+	 * 
+	 * @param article_id
+	 * @param browse
+	 * @return
+	 */
+	Integer updateBrowse(int article_id, int browse);
+
+	/**
+	 * 更新对应博文的评论数
+	 * 
+	 * @param article_id
+	 * @param comment
+	 * @return
+	 */
+	Integer updateComment(int article_id, int comment);
+
+	/**
+	 * 更新对应博文的收藏量
+	 * 
+	 * @param article_id
+	 * @param collect
+	 * @return
+	 */
+	Integer updateCollect(int article_id, int collect);
 }
