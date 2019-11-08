@@ -128,4 +128,20 @@ public interface CsfService {
 	 * @return
 	 */
 	Integer updateCollect(int article_id, int collect);
+
+	/**
+	 * 根据博文id删除对应的博文
+	 * 
+	 * @param article_id
+	 * @return
+	 */
+	Integer deleteArticleById(int article_id);
+
+	/**
+	 * 更新HTMLContent的内容
+	 * 
+	 * @param article
+	 * @return
+	 */
+	Integer updateHTMLContent(Article article);
 }

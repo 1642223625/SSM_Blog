@@ -21,6 +21,16 @@
 	width: 100%;
 	height: 100%;
 }
+
+.toolbar {
+	border: 1px solid #ccc;
+}
+
+.editor {
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	min-height: 400px;
+}
 </style>
 <script type="text/javascript">
 	function setContent() {
@@ -107,12 +117,17 @@
 						<br />
 						<p>博文内容：</p>
 						<!-- 富文本组件---始 -->
-						<div id="editor">
+						<div id="toolbar" class="toolbar"></div>
+						<div id="editor" class="editor">
 							<p>${article.HTMLContent}</p>
 						</div>
 						<script type="text/javascript">
 							var E = window.wangEditor
-							var editor = new E('#editor')
+							var editor = new E('#toolbar', '#editor')
+							editor.customConfig.uploadImgMaxSize = 1 * 1024 * 1024 //图片上传大小限制为1M
+							editor.customConfig.uploadImgMaxLength = 1 //限制一次只允许上传一张图片
+							editor.customConfig.uploadFileName = 'fileName' //定义上传文件名
+							editor.customConfig.uploadImgServer = 'csf/uploadArticlePic?id=${article.id}' //定义服务器地址
 							editor.customConfig.menus = [ 'head', // 标题
 							'bold', // 粗体
 							'fontSize', // 字号
@@ -128,8 +143,8 @@
 							'quote', // 引用
 							'emoticon', // 表情
 							'image', // 插入图片
-							'table', // 表格
-							'video', // 插入视频
+							//'table', // 表格
+							//'video', // 插入视频
 							'code', // 插入代码
 							'undo', // 撤销
 							'redo' // 重复

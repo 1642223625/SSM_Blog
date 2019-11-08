@@ -103,4 +103,14 @@ public class CsfServiceImpl implements CsfService {
 	public Integer updateCollect(int article_id, int collect) {
 		return csfMapper.updateCollect(article_id, collect);
 	}
+
+	@Override
+	public Integer deleteArticleById(int article_id) {
+		return csfMapper.deleteArticleById(article_id);
+	}
+
+	@Override
+	public Integer updateHTMLContent(Article article) {
+		return csfMapper.updateHTMLContent(article);
+	}
 }

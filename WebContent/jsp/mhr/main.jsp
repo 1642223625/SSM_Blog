@@ -97,24 +97,19 @@
 						</div>
 						<div class="d-flex flex-row-reverse" style="margin-top: -20px;">
 							<div class="p-2">
-								<i class="fa fa-heart"></i>
-								${article.collect}
+								<i class="fa fa-heart"></i> ${article.collect}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-comments"></i>
-								${article.comment}
+								<i class="fa fa-comments"></i> ${article.comment}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-eye"></i>
-								${article.browse}
+								<i class="fa fa-eye"></i> ${article.browse}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-clock-o"></i>
-								${article.detailDate}
+								<i class="fa fa-clock-o"></i> ${article.detailDate}
 							</div>
 							<div class="p-2">
-								<i class="fa fa-user"></i>
-								${article.author}
+								<i class="fa fa-user"></i> ${article.author}
 							</div>
 						</div>
 					</div>

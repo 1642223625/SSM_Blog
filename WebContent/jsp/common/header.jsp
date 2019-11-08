@@ -8,7 +8,7 @@
 <body>
 	<header class="header">
 		<div class="title">
-			<h1>开头辟地技术博客</h1>
+			<h1>开天辟地技术博客</h1>
 		</div>
 	</header>
 	<nav class="nav">

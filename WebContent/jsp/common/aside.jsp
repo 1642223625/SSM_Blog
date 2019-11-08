@@ -17,7 +17,7 @@
 					<div class="p-2 width-165">
 						<a
 							href="main?date=${date}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if>"
-							<c:if test="${date == pageInfo.date}">style="color: #717ff9;"</c:if>>${date}</a>
+							<c:if test="${date == pageInfo.date}">style="color: #007BFF;"</c:if>>${date}</a>
 					</div>
 				</c:forEach>
 				<c:if test="${pageInfo.date!=null}">
@@ -37,7 +37,7 @@
 					<div class="p-2 width-165">
 						<a
 							href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
-							<c:if test="${tag.type == pageInfo.type}">style="color: #717ff9;"</c:if>>${tag.type}(${tag.count})</a>
+							<c:if test="${tag.type == pageInfo.type}">style="color: #007BFF;"</c:if>>${tag.type}(${tag.count})</a>
 					</div>
 				</c:forEach>
 				<c:if test="${pageInfo.type!=null}">
@@ -68,7 +68,7 @@
 						<i class="fa fa-comments"></i>${article.comment}
 					</div>
 					<div class="p-2">
-						<i class="fa fa-clock-o"></i>${article.date}
+						<i class="fa fa-clock-o"></i>${article.detailDate}
 					</div>
 				</div>
 			</c:forEach>

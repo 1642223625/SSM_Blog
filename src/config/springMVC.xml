@@ -19,6 +19,7 @@
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
 	<mvc:resources location="/files/" mapping="/files/**"/>
 	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/articlePics/" mapping="/articlePics/**"/>
 	<!-- 视图解析器 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/"/>

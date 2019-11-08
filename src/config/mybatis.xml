@@ -6,5 +6,7 @@
 	<settings>
 		<!-- 配置log4j -->
 		<setting name="logImpl" value="LOG4J" />
+		<!-- 配置自动生成主键 -->
+		<setting name="useGeneratedKeys" value="true" />
 	</settings>
 </configuration>

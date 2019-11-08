@@ -26,7 +26,27 @@ public class CsfController {
 	Logger logger = Logger.getLogger(getClass());
 	@Resource
 	private CsfService csfService;
-	private static Article article;
+
+	@ResponseBody
+	@RequestMapping("uploadArticlePic")
+	public String uploadArticlePic(HttpServletRequest request, MultipartFile fileName) {
+		String path = request.getServletContext().getRealPath("articlePics");// 获取temp临时文件夹路径
+		int article_id = Integer.parseInt(request.getParameter("id"));
+		File articlePics = new File(path + "/" + article_id);
+		if (!articlePics.exists()) {// 如果临时文件夹不存在则新建
+			articlePics.mkdir();
+		}
+		String picFile = fileName.getOriginalFilename();
+		try {
+			String suffix = picFile.substring(picFile.lastIndexOf('.'));// 获取文件后缀
+			picFile = UUID.randomUUID().toString() + suffix;// 随机定义文件名
+			FileUtils.copyInputStreamToFile(fileName.getInputStream(), new File(articlePics, picFile));// 写入图片到服务器
+			return CSFUtil.getReturnJson("articlePics/" + article_id + "/" + picFile);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+		return CSFUtil.getReturnJson("articlePics/" + article_id + "/" + picFile, 1);// 第二个参数非0代表发生错误，默认为0
+	}
 
 	@RequestMapping("showArticleContent")
 	public String singleArticle(HttpServletRequest request) {
@@ -35,8 +55,8 @@ public class CsfController {
 		if (article_idStr != null) {// 如果请求中的博文id不为空则设置为请求值
 			article_id = Integer.parseInt(article_idStr);
 		}
+		Article article = CSFUtil.getArticle(request);
 		article = csfService.selectArticleById(article_id);
-		article.setHTMLContent(CSFUtil.trimPLabel(article.getHTMLContent()));
 		csfService.updateBrowse(article_id, article.getBrowse() + 1);// 更新浏览量加一
 		request.setAttribute("article", article);
 		// 设置文章的层级路径值
@@ -68,10 +88,23 @@ public class CsfController {
 		return "csf/editArticle";
 	}
 
-	@SuppressWarnings({ "deprecation" })
+	@RequestMapping("deleteArticle")
+	public String deleteArticle(HttpServletRequest request) {
+		int article_id = Integer.parseInt(request.getParameter("id"));
+		if (csfService.deleteArticleById(article_id) > 0) {
+			File file = new File(request.getServletContext().getRealPath("articlePics/") + article_id);
+			if (file.exists()) {
+				CSFUtil.deleteDictionary(file);
+			}
+			request.setAttribute("next", "main");
+			return "csf/success";
+		}
+		return "csf/error";
+	}
+
 	@RequestMapping("updateArticle")
 	public String saveContent(HttpServletRequest request) {
-		article = new Article();
+		Article article = CSFUtil.getArticle(request);
 		String menuId_Type = request.getParameter("menuId_Type");
 		String[] mt = menuId_Type.split("-");
 		String tempPicUri = request.getParameter("picUri");// 从编辑页中获取到的图片路径
@@ -87,21 +120,32 @@ public class CsfController {
 		article.setCollect(Integer.parseInt(request.getParameter("collect")));
 		article.setContent(request.getParameter("content"));
 		article.setHTMLContent(request.getParameter("HTMLContent"));
+		article.setHTMLContent(CSFUtil.trimPLabel(article.getHTMLContent()));
 		if (tempPicUri.startsWith("temp/")) {// 在客户端修改过博文图片
 			String picUri = csfService.selectPicUriById(article.getId());
 			if (!"block.jpg".equals(picUri)) {// 如果原图片不是默认的图片，则删除原图片
-				new File(request.getRealPath("images/" + picUri)).delete();
+				new File(request.getServletContext().getRealPath("images/" + picUri)).delete();
 			}
 			picUri = tempPicUri.replace("temp/", "");// 获取暂存区中上传的文件名
-			CSFUtil.copyFile(request.getRealPath(tempPicUri), request.getRealPath("images/" + picUri));
-			new File(request.getRealPath(tempPicUri)).delete();// 删除暂存区中的文件
+			CSFUtil.copyFile(request.getServletContext().getRealPath(tempPicUri),
+					request.getServletContext().getRealPath("images/" + picUri));
+			new File(request.getServletContext().getRealPath(tempPicUri)).delete();// 删除暂存区中的文件
 			article.setPicUri(picUri);
 		} else {
 			article.setPicUri(tempPicUri.replace("images/", ""));// 去除路径，仅存文件名
 		}
 		int result;
 		if ("true".equals(request.getParameter("add"))) {// 对新增还是更新标志位进行判断
-			result = csfService.insertNewArticle(article);
+			result = csfService.insertNewArticle(article);// 新增操作后会自动为该文章的主键值赋值
+			File srcFile = new File(request.getServletContext().getRealPath("articlePics/0"));
+			if (srcFile.exists()) {// 0目录为临时存放新博文中图片的目录，如果该目录存在则说明在新增博文的时候网博文中添加了图片
+				File destFile = new File(request.getServletContext().getRealPath("articlePics/") + article.getId());
+				CSFUtil.copyDictionary(srcFile, destFile);// 拷贝临时的博文图片
+				CSFUtil.deleteDictionary(srcFile);// 删除临时存放文件夹
+				article.setHTMLContent(
+						article.getHTMLContent().replace("articlePics/0", "articlePics/" + article.getId()));
+				csfService.updateHTMLContent(article);// 更新修改过图片路径的HTMLContent
+			}
 		} else {
 			result = csfService.updateArticle(article);
 		}

@@ -22,6 +22,11 @@
 	width: 100%;
 	height: 100%;
 }
+
+#article a {
+	text-decoration: underline;
+	color: #007BFF;
+}
 </style>
 </head>
 <body>
@@ -34,6 +39,9 @@
 					<a class="btn btn-primary btn-sm float-right"
 						href="csf/editArticle?id=${article.id}">编辑该博文</a>
 					<p>博文类型：${article.type}</p>
+					<a class="btn btn-danger btn-sm float-right"
+						href="csf/deleteArticle?id=${article.id}"
+						onclick="return confirm('真的要删除该博文吗？')">删除该博文</a>
 					<p>博文标题：${article.title}</p>
 					<p>博文作者：${article.author}</p>
 					<p>发表日期：${article.detailDate}</p>
@@ -41,9 +49,8 @@
 					<p>浏览人数：${article.browse+1}</p>
 					<p>评论人数：${article.comment}</p>
 					<p>喜欢人数：${article.collect}</p>
-					<p>博文显示</p>
 					<hr />
-					<div>${article.HTMLContent}</div>
+					<div id="article">${article.HTMLContent}</div>
 					<hr>
 				</div>
 			</div>

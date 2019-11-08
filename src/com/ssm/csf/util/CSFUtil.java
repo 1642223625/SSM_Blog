@@ -2,12 +2,14 @@ package com.ssm.csf.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.csf.service.CsfService;
+import com.ssm.pojo.Article;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
+import com.ssm.pojo.PicStatus;
 
 public class CSFUtil {
+	private static List<String> list;
+	private static PicStatus picStatus = new PicStatus();
+	private static ObjectMapper objectMapper = new ObjectMapper();
 	private static Logger logger = Logger.getLogger(CSFUtil.class);
 	private static DateFormat dateDF = new SimpleDateFormat("yyyy年MM月");
 	private static DateFormat detailDateDF = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -44,10 +53,14 @@ public class CSFUtil {
 	}
 
 	public static boolean copyFile(String src, String dest) {// 文件拷贝，用于将暂存区的文件拷贝到存储区
+		return copyFile(new File(src), new File(dest));
+	}
+
+	public static boolean copyFile(File srcFile, File destFile) {
 		byte[] buffer = new byte[1024];
 		int len = 0;
-		try (InputStream is = new BufferedInputStream(new FileInputStream(src));
-				OutputStream os = new BufferedOutputStream(new FileOutputStream(dest))) {
+		try (InputStream is = new BufferedInputStream(new FileInputStream(srcFile));
+				OutputStream os = new BufferedOutputStream(new FileOutputStream(destFile))) {
 			while ((len = is.read(buffer)) != -1) {
 				os.write(buffer, 0, len);
 			}
@@ -55,6 +68,31 @@ public class CSFUtil {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return false;
+		}
+		return true;
+	}
+
+	public static boolean copyDictionary(File src, File dest) {
+		if (src.isFile() || dest.isFile()) {
+			logger.error("源路径和目标路径必须是目录！！！");
+			return false;
+		}
+		if (dest.getAbsolutePath().startsWith(src.getAbsolutePath())) {
+			logger.error("不允许往子目录中拷贝父目录！！！");
+			return false;
+		}
+		File[] srcFiles = src.listFiles();
+		if (srcFiles != null) {
+			for (File file : srcFiles) {
+				if (file.isDirectory()) {
+					copyDictionary(file, new File(dest, file.getName()));
+				} else {
+					if (!dest.exists()) {
+						dest.mkdirs();
+					}
+					CSFUtil.copyFile(file, new File(dest, file.getName()));
+				}
+			}
 		}
 		return true;
 	}
@@ -105,5 +143,46 @@ public class CSFUtil {
 			start = end = 0;
 		}
 		return content;
+	}
+
+	public static Article getArticle(HttpServletRequest request) {// 保证对每一个客户端只有一个article对象
+		Article article = (Article) request.getSession().getAttribute("article");
+		if (article == null) {
+			request.getSession().setAttribute("article", new Article());
+		}
+		return (Article) request.getSession().getAttribute("article");
+	}
+
+	public static String getReturnJson(String url) {
+		return getReturnJson(url, 0);
+	}
+
+	public static String getReturnJson(String url, int errno) {// errno为0表示成功，非0则失败
+		list = new ArrayList<String>();
+		list.add(url);
+		picStatus.setErrno(0);
+		picStatus.setData(list);
+		try {
+			return objectMapper.writeValueAsString(picStatus);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+		}
+		return null;
+	}
+
+	public static void deleteDictionary(File beDeleteFile) {
+		if (beDeleteFile.isFile()) {
+			beDeleteFile.delete();
+		} else {
+			File[] files = beDeleteFile.listFiles();
+			if (files == null) {
+				beDeleteFile.delete();
+			} else {
+				for (File file : files) {
+					deleteDictionary(file);
+				}
+			}
+			beDeleteFile.delete();
+		}
 	}
 }
