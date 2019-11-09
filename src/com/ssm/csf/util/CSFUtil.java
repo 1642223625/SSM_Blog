@@ -119,8 +119,6 @@ public class CSFUtil {
 		}
 		pageInfo = csfService.selectArticles(pageInfo);// 根据已知条件进行查询所有符合条件的博文
 		request.setAttribute("pageInfo", pageInfo);
-		Integer[] pageCount = new Integer[pageInfo.getTotalPage()];// 该空数组只用于页码个数的迭代显示
-		request.setAttribute("pageCount", pageCount);
 	}
 
 	public static String trimPLabel(String content) {// 去除首尾多余的<p></p>和<p><br></p>
