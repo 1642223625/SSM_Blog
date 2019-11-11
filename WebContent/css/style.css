@@ -16,13 +16,35 @@ a {
   transition: all 0.4s ease 0s;
 }
 a:hover {
-  color: #28A745 !important;
+  color: #717ff9 !important;
+}
+/* ◊‘∂®“Â—’…´ */
+.mycolor {
+  color: #717ff9;
+}
+/* ◊‘∂®“Â±≥æ∞…´ */
+.mybg{
+  background-color: #717ff9;
+}
+/* ◊‘∂®“Â∞¥≈• */
+.mybtn {
+  color: #fff !important;
+  background-color: #717ff9;
+  border-radius: 5px;
+}
+.mybtn:hover {
+  color: #fff !important;
+  background-color: #5a69ec;
+}
+/* ¡¥Ω”≤ª±‰…´ */
+.mybtn-a{
+	color: #fff !important;
+}
+.mybtn-a:hover{
+	color: #fff !important;
 }
 .border {
   border: 1px solid red;
-}
-.mycolor {
-  color: #007BFF;
 }
 .clear {
   clear: both;
@@ -30,9 +52,9 @@ a:hover {
 .container {
   max-width: 1200px;
 }
-/* ---------------------------------------------------------Â§¥ÈÉ® */
+/* ---------------------------------------------------------Õ∑≤ø */
 .header {
-  background-color: #007BFF;
+  background-color: #717ff9;
   text-align: center;
   padding: 20px;
   z-index: 10;
@@ -40,12 +62,12 @@ a:hover {
 .header .title {
   color: #fff;
 }
-/* ---------------------------------------------------------ÂØºËà™Ê†è */
+/* ---------------------------------------------------------µº∫Ω¿∏ */
 .nav {
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 10;
+  z-index: 10005;
 }
 .navbar {
   padding: 0;
@@ -63,7 +85,7 @@ a:hover {
 .navbar-mystyle .navbar-nav .nav-link {
   font-size: 15px;
   display: block;
-  padding: 15px;
+  padding: 10px 15px 10px 15px;
 }
 .navbar-mystyle .navbar-toggler {
   color: rgba(0, 0, 0, 0.5);
@@ -87,7 +109,7 @@ a:hover {
 .mydropdown:hover .mydropdown-content {
   display: block;
 }
-/* ---------------------------------------------------------ÂÜÖÂÆπ */
+/* ---------------------------------------------------------ƒ⁄»› */
 .coontent-wrap {
   float: left;
   width: 100%;
@@ -129,7 +151,7 @@ a:hover {
 .coontent-wrap .content .block .head .type {
   position: relative;
   top: -2px;
-  background-color: #007BFF;
+  background-color: #717ff9;
   border-radius: 5px;
   color: #fff;
   margin-right: 10px;
@@ -153,15 +175,15 @@ a:hover {
     display: none !important;
    }
 }
-/* ---------------------------------------------------------ÂàÜÈ°µ */
+/* ---------------------------------------------------------∑÷“≥ */
 .page-link {
-  color: #007BFF;
+  color: #717ff9;
 }
 .page-item.active .page-link {
-  background-color: #007BFF;
-  border-color: #007BFF;
+  background-color: #717ff9;
+  border-color: #717ff9;
 }
-/* ---------------------------------------------------------‰æßËæπÊ†è */
+/* ---------------------------------------------------------≤‡±ﬂ¿∏ */
 .aside {
   float: left;
   width: 350px;
@@ -178,12 +200,16 @@ a:hover {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.aside .block .width-110 {
+  width: 110px;
+  text-align: center;
+}
 .aside .block .width-165 {
   width: 165px;
   text-align: left;
 }
 .mybutton {
-  background-color: #007BFF;
+  background-color: #717ff9;
   color: #fff;
   padding: 0px 6px 2px 6px;
   border-radius: 5px;
@@ -201,7 +227,7 @@ a:hover {
     margin-right: 0;
   }
 }
-/* ---------------------------------------------------------Â∫ïÈÉ® */
+/* ---------------------------------------------------------µ◊≤ø */
 .footer {
   height: 50px;
   background-color: saddlebrown;

@@ -14,8 +14,8 @@
 	<nav class="nav">
 		<div class="container">
 			<nav class="navbar navbar-expand-md bg-white navbar-mystyle">
-				<a class="navbar-brand" href="main">
-					<img alt="Logo" width="80px" src="images/logo.png">
+				<a class="navbar-brand" style="padding:10px" href="main">
+					<img alt="Logo" width="70px" src="images/logo.png">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#collapsibleNavbar">
@@ -46,8 +46,7 @@
 						<li class="nav-item"><a class="nav-link" href="main">赞助作者</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">技术交流</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">项目合作</a></li>
-						<li class="nav-item"><a class="nav-link mybutton"
-								href="csf/addNewArticle">编写博文</a></li>
+						<li class="nav-item"><a class="nav-link mybtn-a mybtn"href="csf/addNewArticle">编写博文</a></li>
 					</ul>
 				</div>
 			</nav>

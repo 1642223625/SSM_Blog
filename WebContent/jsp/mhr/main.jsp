@@ -65,7 +65,7 @@
 					</div>
 					<div class="block">
 						<span>热门排行</span>
-						<hr>
+						<hr style="margin-top: 10px;margin-bottom: 10px;">
 						<c:forEach items="${collect}" var="article" varStatus="status">
 							<div class="d-flex">
 								<div class="p-2">
@@ -82,53 +82,47 @@
 				</c:if>
 				<c:forEach items="${pageInfo.list}" var="article">
 					<div class="block">
-						<div class="head">
-							<span class="type">${article.type}</span>
-							<a class="title" href="csf/showArticleContent?id=${article.id}">${article.title}</a>
-						</div>
-						<div class="d-flex flex-row">
-							<div class="p-2">
-								<img width="165px" height="110px" src="images/${article.picUri}"
-									alt="${article.title}">
-							</div>
-							<div class="p-2">
-								<p>${article.content}</p>
-							</div>
-						</div>
-						<div class="d-flex flex-row-reverse" style="margin-top: -20px;">
-							<div class="p-2">
-								<i class="fa fa-heart"></i> ${article.collect}
-							</div>
-							<div class="p-2">
-								<i class="fa fa-comments"></i> ${article.comment}
-							</div>
-							<div class="p-2">
-								<i class="fa fa-eye"></i> ${article.browse}
-							</div>
-							<div class="p-2">
-								<i class="fa fa-clock-o"></i> ${article.detailDate}
-							</div>
-							<div class="p-2">
-								<i class="fa fa-user"></i> ${article.author}
-							</div>
-						</div>
-					</div>
+                    <div class="head">
+                        <span class="type">${article.type}</span>
+                        <a class="title" href="csf/showArticleContent?id=${article.id}">${article.title}</a>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div class="p-2">
+                            <img class="img" src="images/${article.picUri}" alt="${article.title}">
+                        </div>
+                        <div class="p-1">
+                            <p>
+                                ${article.content}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="boot d-flex flex-row-reverse" style="margin-top: -20px;">
+                        <div class="p-2"><i class="fa fa-heart"></i> ${article.collect}</div>
+                        <div class="p-2"><i class="fa fa-comments"></i> ${article.comment}</div>
+                        <div class="p-2"><i class="fa fa-eye"></i> ${article.browse}</div>
+                        <div class="p-2"><i class="fa fa-clock-o"></i> ${article.detailDate}</div>
+                        <div class="p-2"><i class="fa fa-user"></i> ${article.author}</div>
+                    </div>
+                </div>
 				</c:forEach>
 				<ul class="pagination">
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==1}">disabled</c:if>"><a
-							class="page-link"
-							href="main?pageNumber=${pageInfo.pageNumber-1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">上一页</a></li>
+						class="page-link"
+						href="main?pageNumber=${pageInfo.pageNumber-1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">上一页</a>
+					</li>
 					<c:forEach begin="1" end="${pageInfo.totalPage}" varStatus="status">
 						<li
 							class="page-item <c:if test="${pageInfo.pageNumber==status.count}">active</c:if>"><a
-								class="page-link"
-								href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a></li>
+							class="page-link"
+							href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a>
+						 </li>
 					</c:forEach>
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
-							class="page-link"
-							href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a></li>
+						class="page-link"
+						href="main?pageNumber=${pageInfo.pageNumber+1}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">下一页</a>
+					</li>
 				</ul>
 			</div>
 		</div>
