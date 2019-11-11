@@ -1,9 +1,9 @@
 *.class
-build
-classes
-.idea
+build/
+classes/
+.idea/
 *.iml
 .classpath
 .project
-.settings
+.settings/
 database.properties
