@@ -46,8 +46,7 @@
 						<li class="nav-item"><a class="nav-link" href="main">赞助作者</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">技术交流</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">项目合作</a></li>
-						<li class="nav-item"><a class="nav-link mybtn-a mybtn"
-							href="csf/addNewArticle">编写博文</a></li>
+						<li class="nav-item"><a class="nav-link mybtn-a mybtn" href="csf/addNewArticle">编写博文</a></li>
 					</ul>
 				</div>
 			</nav>
