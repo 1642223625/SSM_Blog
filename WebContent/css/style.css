@@ -18,14 +18,33 @@ a {
 a:hover {
   color: #717ff9 !important;
 }
-.border {
-  border: 1px solid red;
-}
+/* 自定义颜色 */
 .mycolor {
   color: #717ff9;
 }
+/* 自定义背景色 */
 .mybg{
   background-color: #717ff9;
+}
+/* 自定义按钮 */
+.mybtn {
+  color: #fff !important;
+  background-color: #717ff9;
+  border-radius: 5px;
+}
+.mybtn:hover {
+  color: #fff !important;
+  background-color: #5a69ec;
+}
+/* 链接不变色 */
+.mybtn-a{
+	color: #fff !important;
+}
+.mybtn-a:hover{
+	color: #fff !important;
+}
+.border {
+  border: 1px solid red;
 }
 .clear {
   clear: both;
@@ -66,7 +85,7 @@ a:hover {
 .navbar-mystyle .navbar-nav .nav-link {
   font-size: 15px;
   display: block;
-  padding: 15px;
+  padding: 10px 15px 10px 15px;
 }
 .navbar-mystyle .navbar-toggler {
   color: rgba(0, 0, 0, 0.5);

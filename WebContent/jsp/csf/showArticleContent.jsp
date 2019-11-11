@@ -24,7 +24,7 @@
 }
 
 #article a {
-	text-decoration: underline;
+	text-decoration: underline !important;
 	color: #007BFF;
 }
 </style>
@@ -36,10 +36,10 @@
 			<div class="content">
 				<div class="block">
 					<p>导航路径：${path}</p>
-					<a class="btn btn-primary btn-sm float-right"
+					<a class="btn mybtn-a btn-info btn-sm float-right"
 						href="csf/editArticle?id=${article.id}">编辑该博文</a>
 					<p>博文类型：${article.type}</p>
-					<a class="btn btn-danger btn-sm float-right"
+					<a class="btn mybtn-a  btn-danger btn-sm float-right"
 						href="csf/deleteArticle?id=${article.id}"
 						onclick="return confirm('真的要删除该博文吗？')">删除该博文</a>
 					<p>博文标题：${article.title}</p>
