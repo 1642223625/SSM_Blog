@@ -3,8 +3,6 @@ package com.ssm.csf.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.csf.service.CsfService;
 import com.ssm.csf.util.CSFUtil;
 import com.ssm.pojo.Article;
@@ -163,21 +159,9 @@ public class CsfController {
 		return "block.jpg";// 返回默认的博文图片
 	}
 
-	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("changeHeart")
-	public String changeHeart(HttpServletRequest request, int article_id, int count) throws JsonProcessingException {
-		Map<Integer, Boolean> heartMap = (HashMap<Integer, Boolean>) request.getSession().getAttribute("heartMap");
-		Boolean result = heartMap.get(article_id);
-		heartMap.put(article_id, !result);
-		if (result) {
-			count++;
-		} else {
-			count--;
-		}
-		//System.out.println(count);
-		csfService.updateCollect(article_id, count);
-		request.getSession().setAttribute("heartMap", heartMap);
-		return new ObjectMapper().writeValueAsString(result);
+	public String changeHeart(HttpServletRequest request, int article_id, int count) {
+		return CSFUtil.getBooleanJson(csfService.updateCollect(article_id, count) > 0);
 	}
 }

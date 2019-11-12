@@ -27,18 +27,26 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	$(".heart").click(function(){
+	var heartArray = [true,true,true,true,true,true,true,true,true,true]
+	$(".heart").click(function(){//点赞功能
 		var _this=$(this)
 		var count=_this.text()
-		$.getJSON("csf/changeHeart",{article_id:_this.attr("tabindex"),count:count},function(res){
-			if(res==true){
+		var status=heartArray[_this.attr("tabindex")]
+		heartArray[_this.attr("tabindex")]=!status
+		if(status){
+			count++;
+		}else{
+			count--;
+		}
+		$.getJSON("csf/changeHeart",{article_id:_this.attr("role"),count:count},function(res){
+			if(status){
 				_this.css("color","red")
-				_this.html("<i class='fa fa-heart'></i>"+(parseInt(count)+1));
+				_this.html("<i class='fa fa-heart'></i>"+count);
 			}else{
 				_this.css("color","rgb(79,79,79)")
-				_this.html("<i class='fa fa-heart'></i>"+(parseInt(count)-1));
+				_this.html("<i class='fa fa-heart'></i>"+count);
 			}
-		}) 
+		})
 	})
 })
 </script>
@@ -114,7 +122,7 @@ $(function(){
                         </div>
                     </div>
                     <div class="boot d-flex flex-row-reverse" style="margin-top: -20px;">
-                        <div class="p-2"><span class="heart" tabindex="${article.id}"><i class="fa fa-heart"></i>${article.collect}</span></div>
+                        <div class="p-2"><span class="heart" role="${article.id}" tabindex="${status.index}" style="cursor: pointer;"><i class="fa fa-heart"></i>${article.collect}</span></div>
                         <div class="p-2"><i class="fa fa-comments"></i> ${article.comment}</div>
                         <div class="p-2"><i class="fa fa-eye"></i> ${article.browse}</div>
                         <div class="p-2"><i class="fa fa-clock-o"></i> ${article.detailDate}</div>
