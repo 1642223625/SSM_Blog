@@ -3,6 +3,8 @@ package com.ssm.csf.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssm.csf.service.CsfService;
 import com.ssm.csf.util.CSFUtil;
 import com.ssm.pojo.Article;
@@ -29,35 +33,29 @@ public class CsfController {
 
 	@ResponseBody
 	@RequestMapping("uploadArticlePic")
-	public String uploadArticlePic(HttpServletRequest request, MultipartFile fileName) {
-		String path = request.getServletContext().getRealPath("articlePics");// 获取temp临时文件夹路径
-		int article_id = Integer.parseInt(request.getParameter("id"));
-		File articlePics = new File(path + "/" + article_id);
-		if (!articlePics.exists()) {// 如果临时文件夹不存在则新建
+	public String uploadArticlePic(HttpServletRequest request, int id, MultipartFile fileName) {
+		String path = request.getServletContext().getRealPath("articlePics");
+		File articlePics = new File(path + "/" + id);
+		if (!articlePics.exists()) {
 			articlePics.mkdir();
 		}
 		String picFile = fileName.getOriginalFilename();
 		try {
-			String suffix = picFile.substring(picFile.lastIndexOf('.'));// 获取文件后缀
-			picFile = UUID.randomUUID().toString() + suffix;// 随机定义文件名
+			String suffix = picFile.substring(picFile.lastIndexOf('.'));
+			picFile = UUID.randomUUID().toString() + suffix;
 			FileUtils.copyInputStreamToFile(fileName.getInputStream(), new File(articlePics, picFile));// 写入图片到服务器
-			return CSFUtil.getReturnJson("articlePics/" + article_id + "/" + picFile);
+			return CSFUtil.getReturnJson("articlePics/" + id + "/" + picFile);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
-		return CSFUtil.getReturnJson("articlePics/" + article_id + "/" + picFile, 1);// 第二个参数非0代表发生错误，默认为0
+		return CSFUtil.getReturnJson("articlePics/" + id + "/" + picFile, 1);// 第二个参数非0代表发生错误，默认为0
 	}
 
 	@RequestMapping("showArticleContent")
-	public String singleArticle(HttpServletRequest request) {
-		int article_id = 1;// 设置一个默认查看的博文id
-		String article_idStr = request.getParameter("id");
-		if (article_idStr != null) {// 如果请求中的博文id不为空则设置为请求值
-			article_id = Integer.parseInt(article_idStr);
-		}
+	public String singleArticle(HttpServletRequest request, int id) {
 		Article article = CSFUtil.getArticle(request);
-		article = csfService.selectArticleById(article_id);
-		csfService.updateBrowse(article_id, article.getBrowse() + 1);// 更新浏览量加一
+		article = csfService.selectArticleById(id);
+		csfService.updateBrowse(id, article.getBrowse() + 1);// 更新浏览量加一
 		request.setAttribute("article", article);
 		// 设置文章的层级路径值
 		request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
@@ -75,13 +73,8 @@ public class CsfController {
 	}
 
 	@RequestMapping("editArticle")
-	public String editArticle(HttpServletRequest request) {
-		int article_id = 1;
-		String article_idStr = request.getParameter("id");
-		if (article_idStr != null) {
-			article_id = Integer.parseInt(article_idStr);
-		}
-		request.setAttribute("article", csfService.selectArticleById(article_id));
+	public String editArticle(HttpServletRequest request, int id) {
+		request.setAttribute("article", csfService.selectArticleById(id));
 		request.setAttribute("types", csfService.selectAllTypes());
 		request.setAttribute("add", "false");// 用于判断是否为新增的标志位
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
@@ -89,10 +82,9 @@ public class CsfController {
 	}
 
 	@RequestMapping("deleteArticle")
-	public String deleteArticle(HttpServletRequest request) {
-		int article_id = Integer.parseInt(request.getParameter("id"));
-		if (csfService.deleteArticleById(article_id) > 0) {
-			File file = new File(request.getServletContext().getRealPath("articlePics/") + article_id);
+	public String deleteArticle(HttpServletRequest request, int id) {
+		if (csfService.deleteArticleById(id) > 0) {
+			File file = new File(request.getServletContext().getRealPath("articlePics/") + id);
 			if (file.exists()) {
 				CSFUtil.deleteDictionary(file);
 			}
@@ -103,23 +95,14 @@ public class CsfController {
 	}
 
 	@RequestMapping("updateArticle")
-	public String saveContent(HttpServletRequest request) {
-		Article article = CSFUtil.getArticle(request);
-		String menuId_Type = request.getParameter("menuId_Type");
+	public String saveContent(HttpServletRequest request, Article article) {
+		String menuId_Type = request.getParameter("menuId_Type");// 该参数通过POST请求发送，不能在方法中直接赋值
 		String[] mt = menuId_Type.split("-");
-		String tempPicUri = request.getParameter("picUri");// 从编辑页中获取到的图片路径
-		article.setId(Integer.parseInt(request.getParameter("id")));
+		String tempPicUri = article.getPicUri();
 		article.setMenu_id(Integer.parseInt(mt[0]));
 		article.setType(mt[1]);
-		article.setTitle(request.getParameter("title"));
-		article.setAuthor(request.getParameter("author"));
 		article.setDate(CSFUtil.getDate(new Date()));
 		article.setDetailDate(CSFUtil.getDetailDate(new Date()));
-		article.setBrowse(Integer.parseInt(request.getParameter("browse")));
-		article.setComment(Integer.parseInt(request.getParameter("comment")));
-		article.setCollect(Integer.parseInt(request.getParameter("collect")));
-		article.setContent(request.getParameter("content"));
-		article.setHTMLContent(request.getParameter("HTMLContent"));
 		article.setHTMLContent(CSFUtil.trimPLabel(article.getHTMLContent()));
 		if (tempPicUri.startsWith("temp/")) {// 在客户端修改过博文图片
 			String picUri = csfService.selectPicUriById(article.getId());
@@ -178,5 +161,23 @@ public class CsfController {
 			logger.error(e.getMessage());
 		}
 		return "block.jpg";// 返回默认的博文图片
+	}
+
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping("changeHeart")
+	public String changeHeart(HttpServletRequest request, int article_id, int count) throws JsonProcessingException {
+		Map<Integer, Boolean> heartMap = (HashMap<Integer, Boolean>) request.getSession().getAttribute("heartMap");
+		Boolean result = heartMap.get(article_id);
+		heartMap.put(article_id, !result);
+		if (result) {
+			count++;
+		} else {
+			count--;
+		}
+		//System.out.println(count);
+		csfService.updateCollect(article_id, count);
+		request.getSession().setAttribute("heartMap", heartMap);
+		return new ObjectMapper().writeValueAsString(result);
 	}
 }

@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.csf.mapper.CsfMapper">
+	<sql id="typeAndDate">
+		<where>
+			<if test="type != null">
+				type = #{type}
+			</if>
+			<if test="date != null">
+				AND date = #{date}
+			</if>
+		</where>
+	</sql>
 	<resultMap type="article" id="articles">
 		<id property="id" column="id" />
 		<association property="comment"
@@ -11,39 +21,18 @@
 	<select id="selectArticles" parameterType="pageInfo"
 		resultMap="articles">
 		select * from article
-		<where>
-			<if test="type != null">
-				type = #{type}
-			</if>
-			<if test="date != null">
-				AND date = #{date}
-			</if>
-		</where>
+		<include refid="typeAndDate" />
 		order by detailDate desc limit #{rowStart},#{pageSize}
 	</select>
 	<select id="selectArticleCount" parameterType="pageInfo"
 		resultType="int">
 		select count(*) from article
-		<where>
-			<if test="type != null">
-				type = #{type}
-			</if>
-			<if test="date != null">
-				AND date = #{date}
-			</if>
-		</where>
+		<include refid="typeAndDate" />
 	</select>
 	<select id="selectAllArticleDate" parameterType="pageInfo"
 		resultType="string">
 		select distinct date from article
-		<where>
-			<if test="type != null">
-				type = #{type}
-			</if>
-			<if test="date != null">
-				AND date = #{date}
-			</if>
-		</where>
+		<include refid="typeAndDate" />
 	</select>
 	<resultMap type="tag" id="tags">
 		<result property="count" column="count(*)" />
@@ -51,14 +40,7 @@
 	<select id="selectAllTags" parameterType="pageInfo"
 		resultMap="tags">
 		select count(*),type from article
-		<where>
-			<if test="type != null">
-				type = #{type}
-			</if>
-			<if test="date != null">
-				AND date = #{date}
-			</if>
-		</where>
+		<include refid="typeAndDate" />
 		group by type order by count(*) desc
 	</select>
 </mapper>

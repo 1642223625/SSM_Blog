@@ -25,6 +25,23 @@
 	height: 100%;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	$(".heart").click(function(){
+		var _this=$(this)
+		var count=_this.text()
+		$.getJSON("csf/changeHeart",{article_id:_this.attr("tabindex"),count:count},function(res){
+			if(res==true){
+				_this.css("color","red")
+				_this.html("<i class='fa fa-heart'></i>"+(parseInt(count)+1));
+			}else{
+				_this.css("color","rgb(79,79,79)")
+				_this.html("<i class='fa fa-heart'></i>"+(parseInt(count)-1));
+			}
+		}) 
+	})
+})
+</script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -80,7 +97,7 @@
 						</c:forEach>
 					</div>
 				</c:if>
-				<c:forEach items="${pageInfo.list}" var="article">
+				<c:forEach items="${pageInfo.list}" var="article" varStatus="status">
 					<div class="block">
                     <div class="head">
                         <span class="type">${article.type}</span>
@@ -97,7 +114,7 @@
                         </div>
                     </div>
                     <div class="boot d-flex flex-row-reverse" style="margin-top: -20px;">
-                        <div class="p-2"><i class="fa fa-heart"></i> ${article.collect}</div>
+                        <div class="p-2"><span class="heart" tabindex="${article.id}"><i class="fa fa-heart"></i>${article.collect}</span></div>
                         <div class="p-2"><i class="fa fa-comments"></i> ${article.comment}</div>
                         <div class="p-2"><i class="fa fa-eye"></i> ${article.browse}</div>
                         <div class="p-2"><i class="fa fa-clock-o"></i> ${article.detailDate}</div>
