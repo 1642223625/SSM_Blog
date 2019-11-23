@@ -71,54 +71,74 @@
 					</form>
 					<!-- 该表格组件用于获取博文相关信息 -->
 					<form action="csf/updateArticle?add=${add}" method="post">
-						<input type="hidden" name="id" value="${article.id}" />
-						<input type="hidden" name="browse" value="${article.browse}" />
-						<input type="hidden" name="comment" value="${article.comment}" />
-						<input type="hidden" name="collect" value="${article.collect}" />
-						<input type="hidden" name="HTMLContent" id="HTMLContent" />
-						<input type="hidden" name="picUri" id="picUri" />
-						<label>
-							标题：
-							<input name="title" value="${article.title}" size="70" />
-						</label>
-						<br />
-						<label>
-							作者：
-							<input name="author" value="${article.author}" size="70" />
-						</label>
-						<br />
-						<label>
-							博文类型：
-							<select name="menuId_Type">
+						<input type="hidden" name="id" value="${article.id}" /> <input
+							type="hidden" name="browse" value="${article.browse}" /> <input
+							type="hidden" name="comment" value="${article.comment}" /> <input
+							type="hidden" name="collect" value="${article.collect}" /> <input
+							type="hidden" name="HTMLContent" id="HTMLContent" /> <input
+							type="hidden" name="picUri" id="picUri" />
+						<div class="form-inline mt-2 input-group-sm">
+							<label for="email">标题：</label> 
+							<input type="text" class="form-control w-75" name="title" value="${article.title}">
+						</div>
+						<div class="form-inline mt-2 input-group-sm">
+							<label for="email">作者：</label>
+							<input type="text"class="form-control w-75" name="author" value="${article.author}">
+						</div>
+						<div class="form-inline mt-2 input-group-sm">
+							<label for="sel1">类型：</label> 
+							<select class="form-control w-25" id="sel1" name="menuId_Type">
 								<c:forEach items="${types}" var="type">
 									<c:if test="${type.belong==3}">
-										<!-- 每个选项中存储了该选项对应的类型id和类型值 -->
+										<option value="${type.id}-${type.name}"
+										<c:if test="${type.id eq article.menu_id}">selected</c:if>>${type.name}</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group mt-2">
+							<label for="comment">简介：</label>
+      						<textarea class="form-control" rows="3" id="comment" name="content">${article.content}</textarea>
+    					</div>
+    					<label> 设置博文图片：</label><br>
+      					<img id="showImg" class="rounded" width="99px" height="66px" alt="图片加载失败，请重试。注意：上传文件不要过大" 
+      							src="images/${article.picUri}" />
+    					<label for="pic"><span
+							class="mybtn btn-sm ml-2">选择图片</span>
+						</label>
+						<span style="cursor:pointer" class="mybtn btn-sm"
+							onclick="return uploadPic()">上传</span><br>
+						<!-- <label> 标题： <input name="title" value="${article.title}"
+							size="70" />
+						</label> <br /> <label> 作者： <input name="author"
+							value="${article.author}" size="70" />
+						</label> <br /> <label> 博文类型： <select name="menuId_Type">
+								<c:forEach items="${types}" var="type">
+									<c:if test="${type.belong==3}">
+										
 										<option value="${type.id}-${type.name}"
 											<c:if test="${type.id eq article.menu_id}">selected</c:if>>${type.name}</option>
 									</c:if>
 								</c:forEach>
-							</select>
-						</label>
-						<br />
-						<label>
-							当前的博文显示图片为：<img id="showImg" width="99px" height="66px"
-								alt="图片加载失败，请重试。注意：上传文件不要过大" src="images/${article.picUri}" />
-						</label>
-						<br />
-						<label for="pic">
-							设置博文图片：<span class="btn btn-sm btn-primary">请选择</span>
+						</select>
+						</label> <br /> 
+						<label> 当前的博文显示图片为：
+						<img id="showImg" width="99px"
+							height="66px" alt="图片加载失败，请重试。注意：上传文件不要过大"
+							src="images/${article.picUri}" />
+						</label> <br /> 
+						<label for="pic"> 设置博文图片：<span
+							class="btn btn-sm btn-primary">请选择</span>
 						</label>
 						<button class="btn btn-sm btn-primary"
 							onclick="return uploadPic()">上传</button>
-						<label>
-							博文简介：
-							<textarea name="content" cols="80" rows="5" class="float-right">${article.content}</textarea>
-						</label>
-						<br />
-						<p>博文内容：</p>
+						<label> 博文简介： <textarea name="content" cols="80" rows="5"
+								class="float-right">${article.content}</textarea>
+						</label> <br /> -->
+						<label class="mt-2"> 博文内容：</label><br>
 						<!-- 富文本组件---始 -->
-						<div id="toolbar" class="toolbar"></div>
-						<div id="editor" class="editor">
+						<div id="toolbar" class="toolbar rounded"></div>
+						<div id="editor" class="editor rounded">
 							<p>${article.HTMLContent}</p>
 						</div>
 						<script type="text/javascript">
@@ -153,10 +173,10 @@
 						</script>
 						<!-- 富文本组件---终-->
 						<p></p>
-						<center>
-							<input type="submit" value="提交" class="btn btn-lg btn-primary"
+						<div class="text-center">
+							<input type="submit" style="border:none;width:100px" value="提交" class="mybtn"
 								onclick="return setContent()" />
-						</center>
+						</div>
 						<hr>
 					</form>
 				</div>

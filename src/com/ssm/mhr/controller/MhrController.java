@@ -31,5 +31,9 @@ public class MhrController {
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
 		return "mhr/main";
 	}
+	@RequestMapping("aboutMe")
+	public String aboutMe(HttpServletRequest request) {
+		return "mhr/aboutMe";
+	}
 
 }

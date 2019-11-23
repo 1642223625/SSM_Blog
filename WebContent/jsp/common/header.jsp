@@ -41,12 +41,12 @@
 								<a class="nav-link" href="main?type=Other">Other</a>
 							</div></li>
 						<li class="nav-item"><a class="nav-link" href="main">福利专区</a></li>
-						<li class="nav-item"><a class="nav-link" href="main">关于博主</a></li>
+						<li class="nav-item"><a class="nav-link" href="aboutMe">关于博主</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">给我留言</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">赞助作者</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">技术交流</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">项目合作</a></li>
-						<li class="nav-item"><a class="nav-link mybtn-a mybtn"href="csf/addNewArticle">编写博文</a></li>
+						<li class="nav-item"><a class="nav-link mybtn-a mybtn" href="csf/addNewArticle">编写博文</a></li>
 					</ul>
 				</div>
 			</nav>

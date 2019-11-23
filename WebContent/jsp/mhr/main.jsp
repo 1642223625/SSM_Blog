@@ -116,7 +116,7 @@
 							class="page-item <c:if test="${pageInfo.pageNumber==status.count}">active</c:if>"><a
 							class="page-link"
 							href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a>
-						 </li>
+						</li>
 					</c:forEach>
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
