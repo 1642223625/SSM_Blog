@@ -14,42 +14,18 @@
 <title>博客首页</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 <!-- 引用顺序别调换 -->
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/style.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<style>
+<script src="js/main.js"></script>
+<style type="text/css">
 /* Make the image fully responsive */
 .carousel-inner img {
 	width: 100%;
 	height: 100%;
 }
 </style>
-<script type="text/javascript">
-$(function(){
-	var heartArray = [true,true,true,true,true,true,true,true,true,true]
-	$(".heart").click(function(){//点赞功能
-		var _this=$(this)
-		var count=_this.text()
-		var status=heartArray[_this.attr("tabindex")]
-		heartArray[_this.attr("tabindex")]=!status
-		if(status){
-			count++;
-		}else{
-			count--;
-		}
-		$.getJSON("csf/changeHeart",{article_id:_this.attr("role"),count:count},function(res){
-			if(status){
-				_this.css("color","red")
-				_this.html("<i class='fa fa-heart'></i>"+count);
-			}else{
-				_this.css("color","rgb(79,79,79)")
-				_this.html("<i class='fa fa-heart'></i>"+count);
-			}
-		})
-	})
-})
-</script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>

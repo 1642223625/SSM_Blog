@@ -3,6 +3,7 @@ package com.ssm.csf.service;
 import java.util.List;
 
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Comment;
 import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
@@ -144,4 +145,12 @@ public interface CsfService {
 	 * @return
 	 */
 	Integer updateHTMLContent(Article article);
+
+	/**
+	 * 新增一条评论信息
+	 * 
+	 * @param comment
+	 * @return
+	 */
+	Integer insertNewComment(Comment comment);
 }

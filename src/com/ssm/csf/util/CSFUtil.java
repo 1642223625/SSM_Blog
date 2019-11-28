@@ -192,4 +192,13 @@ public class CSFUtil {
 		}
 		return null;
 	}
+	
+	public static String getDateJson(String date) {
+		try {
+			return objectMapper.writeValueAsString(date);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+		}
+		return null;
+	}
 }

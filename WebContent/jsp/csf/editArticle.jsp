@@ -9,20 +9,16 @@
 <head>
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>编辑博文</title>
+<title>编辑--${article.title}</title>
 <link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/font-awesome.css">
 <link rel="stylesheet" href="css/wangEditor.css">
+<link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/wangEditor.js"></script>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<style>
-.carousel-inner img {
-	width: 100%;
-	height: 100%;
-}
-
+<script type="text/javascript" src="js/editArticle.js"></script>
+<style type="text/css">
 .toolbar {
 	border: 1px solid #ccc;
 }
@@ -37,32 +33,6 @@
 	display:none;
 }
 </style>
-<script type="text/javascript">
-	function setContent() {
-		$("#HTMLContent").val(editor.txt.html());
-		$("#picUri").val($("#showImg").attr("src"));
-		return true;
-	}
-	function uploadPic() {
-		var formData = new FormData($("#articleForm")[0])
-		formData.append("picFile", $('#pic')[0].files[0])
-		$.ajax({
-			url : "csf/uploadPic",
-			type : "POST",
-			contentType : false,
-			data : formData,
-			processData : false,
-			success : function(res) {
-				//设置图片URL，暂存于临时存储区中
-				$("#showImg").attr("src", "temp/" + res)
-			},
-			error : function() {
-				alert("请求出错");
-			}
-		});
-		return false;
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>

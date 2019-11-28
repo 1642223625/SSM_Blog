@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ssm.csf.mapper.CsfMapper;
 import com.ssm.csf.service.CsfService;
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Comment;
 import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
@@ -112,5 +113,10 @@ public class CsfServiceImpl implements CsfService {
 	@Override
 	public Integer updateHTMLContent(Article article) {
 		return csfMapper.updateHTMLContent(article);
+	}
+
+	@Override
+	public Integer insertNewComment(Comment comment) {
+		return csfMapper.insertNewComment(comment);
 	}
 }

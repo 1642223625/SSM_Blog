@@ -6,5 +6,5 @@ import com.ssm.pojo.Comment;;
 
 public interface LsdService {
 	
-	List<Comment> loadComment(String articleId);
+	List<Comment> selectComment(int articleId);
 }

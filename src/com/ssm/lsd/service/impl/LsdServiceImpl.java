@@ -17,9 +17,8 @@ public class LsdServiceImpl implements LsdService{
 
 
 	@Override
-	public List<Comment> loadComment(String id) {
-		// TODO Auto-generated method stub
-		return lsdMapper.loadComment(id);
+	public List<Comment> selectComment(int id) {
+		return lsdMapper.selectComment(id);
 	}
 
 	

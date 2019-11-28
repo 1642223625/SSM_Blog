@@ -12,12 +12,15 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssm.csf.service.CsfService;
 import com.ssm.csf.util.CSFUtil;
+import com.ssm.lsd.service.LsdService;
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Comment;
 import com.ssm.pojo.PageInfo;
 
 @Controller
@@ -26,6 +29,8 @@ public class CsfController {
 	Logger logger = Logger.getLogger(getClass());
 	@Resource
 	private CsfService csfService;
+	@Resource
+	private LsdService lsdService;
 
 	@ResponseBody
 	@RequestMapping("uploadArticlePic")
@@ -56,6 +61,7 @@ public class CsfController {
 		// 设置文章的层级路径值
 		request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
+		request.setAttribute("comments", lsdService.selectComment(article.getId()));
 		return "csf/showArticleContent";
 	}
 
@@ -161,7 +167,23 @@ public class CsfController {
 
 	@ResponseBody
 	@RequestMapping("changeHeart")
-	public String changeHeart(HttpServletRequest request, int article_id, int count) {
+	public String changeHeart(int article_id, int count) {
 		return CSFUtil.getBooleanJson(csfService.updateCollect(article_id, count) > 0);
+	}
+
+	@ResponseBody
+	@RequestMapping("addComment")
+	public String addComment(int id, String authorName, String content,
+			@RequestParam(name = "contact", required = false) String contact) {
+		Comment comment = new Comment();
+		comment.setArticle_id(id);
+		comment.setAuthorName(authorName);
+		comment.setContent(content);
+		comment.setContact(contact);
+		comment.setDate(CSFUtil.getDetailDate(new Date()));
+		if (csfService.insertNewComment(comment) > 0) {
+			return CSFUtil.getDateJson(comment.getDate());
+		}
+		return null;
 	}
 }

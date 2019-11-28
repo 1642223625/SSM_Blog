@@ -7,7 +7,7 @@ public class PageInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer pageNumber = 1;// 默认第一页
 	private Integer rowStart;
-	private Integer pageSize = 10;// 默认每页十条数据
+	private Integer pageSize = 8;// 默认每页八条数据
 	private Integer totalPage;
 	private String type;
 	private String date;

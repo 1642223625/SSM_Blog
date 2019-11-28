@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.ssm.pojo.Article;
+import com.ssm.pojo.Comment;
 import com.ssm.pojo.Link;
 import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
@@ -30,6 +31,8 @@ public interface CsfMapper {
 			+ "#{detailDate},0,0,0,#{content},#{HTMLContent},#{picUri})")
 	Integer insertNewArticle(Article article);
 
+	@Insert("insert into comment values(default,#{authorName},#{content},#{date},#{contact},#{article_id})")
+	Integer insertNewComment(Comment comment);
 	/*
 	 * Delete
 	 */
