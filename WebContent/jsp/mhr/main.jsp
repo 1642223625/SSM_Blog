@@ -125,7 +125,9 @@ $(function(){
                     </div>
                     <div class="d-flex flex-row">
                         <div class="p-2">
-                            <img class="img" src="images/${article.picUri}" alt="${article.title}">
+                        	<div style="overflow: hidden;">
+                        		<img class="img" src="images/${article.picUri}" alt="${article.title}">
+                        	</div>
                         </div>
                         <div class="p-1">
                             <p>

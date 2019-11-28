@@ -138,8 +138,13 @@ a:hover {
   -webkit-box-orient: vertical;
 }
 .coontent-wrap .content .block .img {
- width: 165px;
- height: 110px;
+  width: 165px;
+  height: 110px;
+  transition:all 0.5s;
+}
+.coontent-wrap .content .block:hover .img{
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .coontent-wrap .content .block .boot {
   font-size: 14px;
