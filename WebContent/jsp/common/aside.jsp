@@ -22,7 +22,7 @@
 				</c:forEach>
 				<c:if test="${pageInfo.date!=null}">
 					<div class="p-2 center-block" style="width: 300px">
-						<a class="btn btn-sm mybutton"
+						<a class="btn btn-sm mybtn-a mybg"
 							href="main<c:if test="${pageInfo.type!=null}">?type=${pageInfo.type}</c:if>">清除日期筛选条件</a>
 					</div>
 				</c:if>
@@ -42,7 +42,7 @@
 				</c:forEach>
 				<c:if test="${pageInfo.type!=null}">
 					<div class="p-2 center-block" style="width: 300px">
-						<a class="btn btn-sm mybutton"
+						<a class="btn btn-sm mybtn-a mybg"
 							href="main<c:if test="${pageInfo.date!=null}">?date=${pageInfo.date}</c:if>">清除类型筛选条件</a>
 					</div>
 				</c:if>

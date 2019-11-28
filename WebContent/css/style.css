@@ -31,6 +31,7 @@ a:hover {
   color: #fff !important;
   background-color: #717ff9;
   border-radius: 5px;
+  padding: 0.375rem 0.75rem;
 }
 .mybtn:hover {
   color: #fff !important;
@@ -137,8 +138,13 @@ a:hover {
   -webkit-box-orient: vertical;
 }
 .coontent-wrap .content .block .img {
- width: 165px;
- height: 110px;
+  width: 165px;
+  height: 110px;
+  transition:all 0.5s;
+}
+.coontent-wrap .content .block:hover .img{
+  cursor: pointer;
+  transform: scale(1.1);
 }
 .coontent-wrap .content .block .boot {
   font-size: 14px;
@@ -231,4 +237,29 @@ a:hover {
 .footer {
   height: 50px;
   background-color: #717ff9;
+}
+/* ---------------------------------------------------------���ڲ��� */
+.aboutcontent{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+.aboutcontent p{
+  line-height: 30px;
+}
+.possblock{
+  max-width: 500px;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 80px;
+}
+.possblock .lab{
+  width: 80px;
+  position: absolute;
+  left: 0px;
+  text-align: center;
+  font-size: 14px;
 }

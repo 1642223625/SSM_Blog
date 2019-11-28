@@ -44,16 +44,28 @@
 						<!-- 轮播图片 -->
 						<div class="carousel-inner myrounded">
 							<div class="carousel-item  active">
-								<img class="myrounded" src="images/img3.jpg">
+								<a href=""><img class="myrounded" src="images/img3.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第一张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img4.jpg">
+								<a href=""><img class="myrounded" src="images/img4.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第二张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img5.jpg">
+								<a href=""><img class="myrounded" src="images/img5.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第三张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img6.jpg">
+								<a href=""><img class="myrounded" src="images/img6.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第四张图片描述标题</h4>
+                            	</div>
 							</div>
 						</div>
 						<!-- 左右切换按钮 -->
@@ -89,7 +101,9 @@
                     </div>
                     <div class="d-flex flex-row">
                         <div class="p-2">
-                            <img class="img" src="images/${article.picUri}" alt="${article.title}">
+                        	<div style="overflow: hidden;">
+                        		<img class="img" src="images/${article.picUri}" alt="${article.title}">
+                        	</div>
                         </div>
                         <div class="p-1">
                             <p>
@@ -117,7 +131,7 @@
 							class="page-item <c:if test="${pageInfo.pageNumber==status.count}">active</c:if>"><a
 							class="page-link"
 							href="main?pageNumber=${status.count}<c:if test="${pageInfo.type!=null}">&type=${pageInfo.type}</c:if><c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>">${status.count}</a>
-						 </li>
+						</li>
 					</c:forEach>
 					<li
 						class="page-item <c:if test="${pageInfo.pageNumber==pageInfo.totalPage}">disabled</c:if>"><a
