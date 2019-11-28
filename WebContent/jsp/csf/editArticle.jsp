@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/wangEditor.css">
 <script type="text/javascript" src="js/wangEditor.js"></script>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
@@ -30,6 +31,10 @@
 	border: 1px solid #ccc;
 	margin-top: 10px;
 	min-height: 400px;
+}
+
+.w-e-text::-webkit-scrollbar{
+	display:none;
 }
 </style>
 <script type="text/javascript">

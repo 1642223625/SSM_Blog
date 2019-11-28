@@ -183,4 +183,13 @@ public class CSFUtil {
 			beDeleteFile.delete();
 		}
 	}
+
+	public static String getBooleanJson(boolean is) {
+		try {
+			return objectMapper.writeValueAsString(is);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+		}
+		return null;
+	}
 }
