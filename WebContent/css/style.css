@@ -233,3 +233,28 @@ a:hover {
   height: 50px;
   background-color: saddlebrown;
 }
+/* ---------------------------------------------------------¹ØÓÚ²©Ö÷ */
+.aboutcontent{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+.aboutcontent p{
+  line-height: 30px;
+}
+.possblock{
+  max-width: 500px;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 80px;
+}
+.possblock .lab{
+  width: 80px;
+  position: absolute;
+  left: 0px;
+  text-align: center;
+  font-size: 14px;
+}

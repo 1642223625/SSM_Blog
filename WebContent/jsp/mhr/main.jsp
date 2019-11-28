@@ -68,16 +68,28 @@ $(function(){
 						<!-- 轮播图片 -->
 						<div class="carousel-inner myrounded">
 							<div class="carousel-item  active">
-								<img class="myrounded" src="images/img3.jpg">
+								<a href=""><img class="myrounded" src="images/img3.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第一张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img4.jpg">
+								<a href=""><img class="myrounded" src="images/img4.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第二张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img5.jpg">
+								<a href=""><img class="myrounded" src="images/img5.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第三张图片描述标题</h4>
+                            	</div>
 							</div>
 							<div class="carousel-item ">
-								<img class="myrounded" src="images/img6.jpg">
+								<a href=""><img class="myrounded" src="images/img6.jpg"></a>
+								<div class="carousel-caption">
+                                	<h4>第四张图片描述标题</h4>
+                            	</div>
 							</div>
 						</div>
 						<!-- 左右切换按钮 -->
