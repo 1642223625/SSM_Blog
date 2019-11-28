@@ -122,7 +122,7 @@ $(function(){
                         </div>
                     </div>
                     <div class="boot d-flex flex-row-reverse" style="margin-top: -20px;">
-                        <div class="p-2"><span class="heart" role="${article.id}" tabindex="${status.index}" style="cursor: pointer;"><i class="fa fa-heart"></i>${article.collect}</span></div>
+                        <div class="p-2"><span class="heart" role="${article.id}" tabindex="${status.index}" style="cursor: pointer;"><i class="fa fa-heart"></i> ${article.collect}</span></div>
                         <div class="p-2"><i class="fa fa-comments"></i> ${article.comment}</div>
                         <div class="p-2"><i class="fa fa-eye"></i> ${article.browse}</div>
                         <div class="p-2"><i class="fa fa-clock-o"></i> ${article.detailDate}</div>

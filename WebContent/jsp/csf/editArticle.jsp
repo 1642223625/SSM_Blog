@@ -32,6 +32,10 @@
 	margin-top: 10px;
 	min-height: 400px;
 }
+
+.w-e-text::-webkit-scrollbar{
+	display:none;
+}
 </style>
 <script type="text/javascript">
 	function setContent() {

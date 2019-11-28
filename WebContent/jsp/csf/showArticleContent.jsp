@@ -29,6 +29,14 @@
 	text-decoration: underline !important;
 	color: #007BFF;
 }
+
+.large-icon{
+	font-size: 1.4em;
+}
+
+.w-e-text::-webkit-scrollbar{
+	display:none;
+}
 </style>
 </head>
 <body>
@@ -37,23 +45,32 @@
 		<div class="coontent-wrap">
 			<div class="content">
 				<div class="block">
-					<p>导航路径：${path}</p>
-					<a class="btn btn-sm mybtn-a btn-info float-right"
-						href="csf/editArticle?id=${article.id}">编辑该博文</a>
-					<p>博文类型：${article.type}</p>
-					<a class="btn btn-sm mybtn-a btn-danger float-right"
-						href="csf/deleteArticle?id=${article.id}"
-						onclick="return confirm('真的要删除该博文吗？')">删除该博文</a>
-					<p>博文标题：${article.title}</p>
-					<p>博文作者：${article.author}</p>
-					<p>发表日期：${article.detailDate}</p>
-					<!-- 每浏览一次浏览次数加一， 但因为没有再次查询数据库，所以直接在前台加一 -->
-					<p>浏览人数：${article.browse+1}</p>
-					<p>评论人数：${article.comment}</p>
-					<p>喜欢人数：${article.collect}</p>
+					<p>
+						<i class="fa fa-home large-icon"></i> ${path} >
+						${article.title}
+					</p>
+					<hr />				
+					<h2 style="line-height: 2em;text-overflow: ellipsis;" title="${article.title}">博文标题：${article.title}</h2>	
+					<div>
+						<span><i class="fa fa-tag large-icon"></i> ${article.type}</span>&nbsp; &nbsp;
+						<span><i class="fa fa-user large-icon"></i> ${article.author}</span>&nbsp; &nbsp;
+						<span><i class="fa fa-clock-o large-icon"></i> ${article.detailDate}</span>&nbsp; &nbsp;
+						<!-- 每浏览一次浏览次数加一， 但因为没有再次查询数据库，所以直接在前台加一 -->
+						<span><i class="fa fa-eye large-icon"></i> ${article.browse+1}</span>&nbsp; &nbsp;
+						<span><i class="fa fa-comments large-icon"></i> ${article.comment}</span>&nbsp; &nbsp;
+						<span><i class="fa fa-heart large-icon"></i> ${article.collect}</span>
+						<div class="pull-right">
+							<a class="btn btn-sm mybtn-a btn-info"
+							href="csf/editArticle?id=${article.id}">编辑该博文</a>
+							<a class="btn btn-sm mybtn-a btn-danger"
+							href="csf/deleteArticle?id=${article.id}"
+							onclick="return confirm('真的要删除该博文吗？')">删除该博文</a>
+						</div>
+					</div>
 					<hr />
-					<div id="article">${article.HTMLContent}</div>
+					<div class="w-e-text">${article.HTMLContent}</div>
 					<hr>
+					<div>评论区</div>
 				</div>
 			</div>
 		</div>
