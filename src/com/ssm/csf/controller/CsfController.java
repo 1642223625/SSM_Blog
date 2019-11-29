@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +21,7 @@ import com.ssm.csf.util.CSFUtil;
 import com.ssm.lsd.service.LsdService;
 import com.ssm.pojo.Article;
 import com.ssm.pojo.Comment;
+import com.ssm.pojo.Menu;
 import com.ssm.pojo.PageInfo;
 
 @Controller
@@ -31,6 +32,8 @@ public class CsfController {
 	private CsfService csfService;
 	@Resource
 	private LsdService lsdService;
+	@Value("${commentPageSize}")
+	private Integer commentPageSize;
 
 	@ResponseBody
 	@RequestMapping("uploadArticlePic")
@@ -61,7 +64,8 @@ public class CsfController {
 		// 设置文章的层级路径值
 		request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
 		CSFUtil.setAside(request, csfService, (PageInfo) request.getSession().getAttribute("pageInfo"));
-		request.setAttribute("comments", lsdService.selectComment(article.getId()));
+		// 每次新进一个博文就把评论置位1，从头加载评论信息
+		request.setAttribute("comments", lsdService.selectComment(article.getId(), 1, commentPageSize));
 		return "csf/showArticleContent";
 	}
 
@@ -173,16 +177,29 @@ public class CsfController {
 
 	@ResponseBody
 	@RequestMapping("addComment")
-	public String addComment(int id, String authorName, String content,
-			@RequestParam(name = "contact", required = false) String contact) {
-		Comment comment = new Comment();
+	public String addComment(int id, Comment comment) {
 		comment.setArticle_id(id);
-		comment.setAuthorName(authorName);
-		comment.setContent(content);
-		comment.setContact(contact);
 		comment.setDate(CSFUtil.getDetailDate(new Date()));
 		if (csfService.insertNewComment(comment) > 0) {
 			return CSFUtil.getDateJson(comment.getDate());
+		}
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "queryComment", produces = "application/json; charset=utf-8")
+	public String queryComment(int id, int pageNumber) {
+		return CSFUtil.getObjectJson(lsdService.selectComment(id, pageNumber, commentPageSize));
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "addNewType", produces = "application/json; charset=utf-8")
+	public String addNewType(String typeName) {
+		Menu menu = new Menu();
+		menu.setName(typeName);
+		menu.setBelong(3);
+		if (csfService.insertNewType(menu) > 0) {
+			return CSFUtil.getObjectJson(menu);
 		}
 		return null;
 	}

@@ -201,4 +201,13 @@ public class CSFUtil {
 		}
 		return null;
 	}
+	
+	public static String getObjectJson(Object object) {
+		try {
+			return objectMapper.writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+		}
+		return null;
+	}
 }

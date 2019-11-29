@@ -9,7 +9,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>编辑--${article.title}</title>
+<title>编辑 &nbsp; ${article.title}</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/font-awesome.css">
 <link rel="stylesheet" href="css/wangEditor.css">
@@ -21,6 +21,9 @@
 <style type="text/css">
 .toolbar {
 	border: 1px solid #ccc;
+  	position: sticky;
+  	top: 65px;
+  	z-index: 10;
 }
 
 .editor {
@@ -34,7 +37,7 @@
 }
 </style>
 </head>
-<body>
+<body onload="setZIndex()">
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<section class="container">
 		<div class="coontent-wrap">
@@ -70,6 +73,7 @@
 									</c:if>
 								</c:forEach>
 							</select>
+							<span data-toggle="modal" data-target="#addNewType" class="mybtn btn-sm ml-2">添加类型</span>
 						</div>
 						<div class="form-group mt-2">
 							<label for="comment">简介：</label>
@@ -83,33 +87,6 @@
 						</label>
 						<span style="cursor:pointer" class="mybtn btn-sm"
 							onclick="return uploadPic()">上传</span><br>
-						<!-- <label> 标题： <input name="title" value="${article.title}"
-							size="70" />
-						</label> <br /> <label> 作者： <input name="author"
-							value="${article.author}" size="70" />
-						</label> <br /> <label> 博文类型： <select name="menuId_Type">
-								<c:forEach items="${types}" var="type">
-									<c:if test="${type.belong==3}">
-										
-										<option value="${type.id}-${type.name}"
-											<c:if test="${type.id eq article.menu_id}">selected</c:if>>${type.name}</option>
-									</c:if>
-								</c:forEach>
-						</select>
-						</label> <br /> 
-						<label> 当前的博文显示图片为：
-						<img id="showImg" width="99px"
-							height="66px" alt="图片加载失败，请重试。注意：上传文件不要过大"
-							src="images/${article.picUri}" />
-						</label> <br /> 
-						<label for="pic"> 设置博文图片：<span
-							class="btn btn-sm btn-primary">请选择</span>
-						</label>
-						<button class="btn btn-sm btn-primary"
-							onclick="return uploadPic()">上传</button>
-						<label> 博文简介： <textarea name="content" cols="80" rows="5"
-								class="float-right">${article.content}</textarea>
-						</label> <br /> -->
 						<label class="mt-2"> 博文内容：</label><br>
 						<!-- 富文本组件---始 -->
 						<div id="toolbar" class="toolbar rounded"></div>
@@ -149,7 +126,7 @@
 						<!-- 富文本组件---终-->
 						<p></p>
 						<div class="text-center">
-							<input type="submit" style="border:none;width:100px" value="提交" class="mybtn"
+							<input type="submit" style="border:none;width:100px" value="提交" class="btn-lg mybtn"
 								onclick="return setContent()" />
 						</div>
 						<hr>
@@ -161,5 +138,6 @@
 		<div class="clear"></div>
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="addNewType.jsp"></jsp:include>
 </body>
 </html>

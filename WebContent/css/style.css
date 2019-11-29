@@ -58,7 +58,7 @@ a:hover {
   background-color: #717ff9;
   text-align: center;
   padding: 20px;
-  z-index: 10;
+  z-index: 11;
 }
 .header .title {
   color: #fff;
@@ -68,7 +68,8 @@ a:hover {
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 10005;
+  opacity: 1;
+  z-index: 11;
 }
 .navbar {
   padding: 0;

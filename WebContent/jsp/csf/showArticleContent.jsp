@@ -95,6 +95,7 @@
 					<div>
 						<div>
 							<input type="hidden" name="id" value="${article.id}"/>
+							<input type="hidden" name="pageNumber" value="1"/><!-- 该值用于记录评论记载次数，即分页查询的页数 --> 
 							<textarea class="textarea" name="content" placeholder="想对作者说点什么" required></textarea>
 							<input type="text" class="input_focus" name="authorName" size="20" placeholder="昵称" required/>
 							<input type="text" class="input_focus" name="contact" size="30" placeholder="联系方式，仅作者可见"/>
@@ -120,4 +121,18 @@
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
+<script type="text/javascript">
+	/* 这一段JS不能移动到头部中去 */
+	var scrollTop,currtTop,pageNumber,currentPage = $("input[name='pageNumber']").val()
+	window.onmousewheel = function(){
+	   scrollTop = document.documentElement.scrollTop
+	   currtTop = document.documentElement.clientHeight + scrollTop
+	   pageNumber = $("input[name='pageNumber']").val()
+	   //注意当name=pageNumber的值标志为0时不再异步查询
+	   if(currtTop >= document.body.scrollHeight && currentPage == pageNumber && pageNumber != 0){
+		   currentPage = parseInt(currentPage)+1
+	       getNewComment()
+	   }
+	}
+</script>
 </html>

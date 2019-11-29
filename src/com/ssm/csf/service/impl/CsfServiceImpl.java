@@ -119,4 +119,9 @@ public class CsfServiceImpl implements CsfService {
 	public Integer insertNewComment(Comment comment) {
 		return csfMapper.insertNewComment(comment);
 	}
+
+	@Override
+	public Integer insertNewType(Menu menu) {
+		return csfMapper.insertNewType(menu);
+	}
 }

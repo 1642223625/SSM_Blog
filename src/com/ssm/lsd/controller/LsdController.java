@@ -20,7 +20,7 @@ public class LsdController {
 	@RequestMapping("loadComment")
 	public String loadComment(HttpServletRequest request) {
 		Integer articleId = Integer.parseInt(request.getParameter("id"));
-		request.setAttribute("comments", lsdervice.selectComment(articleId));
+		request.setAttribute("comments", lsdervice.selectComment(articleId,0,5));
 		request.setAttribute("aid", articleId);
 		return "lsd/Test";
 	}

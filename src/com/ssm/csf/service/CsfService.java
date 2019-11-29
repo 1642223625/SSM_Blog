@@ -153,4 +153,12 @@ public interface CsfService {
 	 * @return
 	 */
 	Integer insertNewComment(Comment comment);
+
+	/**
+	 * 添加新的类型，即菜单项
+	 * 
+	 * @param menu
+	 * @return
+	 */
+	Integer insertNewType(Menu menu);
 }

@@ -36,37 +36,20 @@
 					<div id="demo" class="carousel slide mt-3" data-ride="carousel">
 						<!-- 指示符 -->
 						<ul class="carousel-indicators">
-							<li data-target="#demo" data-slide-to="0" class="active"></li>
-							<li data-target="#demo" data-slide-to="1"></li>
-							<li data-target="#demo" data-slide-to="2"></li>
-							<li data-target="#demo" data-slide-to="3"></li>
+							<c:forEach items="${collect}" varStatus="status">
+								<li data-target="#demo" data-slide-to="${status.index}" <c:if test="${status.index eq 0}">class="active"</c:if>></li>
+							</c:forEach>
 						</ul>
 						<!-- 轮播图片 -->
 						<div class="carousel-inner myrounded">
-							<div class="carousel-item  active">
-								<a href=""><img class="myrounded" src="images/img3.jpg"></a>
-								<div class="carousel-caption">
-                                	<h4>第一张图片描述标题</h4>
-                            	</div>
-							</div>
-							<div class="carousel-item ">
-								<a href=""><img class="myrounded" src="images/img4.jpg"></a>
-								<div class="carousel-caption">
-                                	<h4>第二张图片描述标题</h4>
-                            	</div>
-							</div>
-							<div class="carousel-item ">
-								<a href=""><img class="myrounded" src="images/img5.jpg"></a>
-								<div class="carousel-caption">
-                                	<h4>第三张图片描述标题</h4>
-                            	</div>
-							</div>
-							<div class="carousel-item ">
-								<a href=""><img class="myrounded" src="images/img6.jpg"></a>
-								<div class="carousel-caption">
-                                	<h4>第四张图片描述标题</h4>
-                            	</div>
-							</div>
+							<c:forEach items="${collect}" var="article" varStatus="status">
+								<div class="carousel-item <c:if test="${status.index eq 0}">active</c:if>" style="height: 300px;">
+									<a href="csf/showArticleContent?id=${article.id}"><img class="myrounded" src="images/${article.picUri}"/></a>
+									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.3);">
+	                                	<h4><a href="csf/showArticleContent?id=${article.id}" style="color: white;">${article.title}</a></h4>
+	                            	</div>
+								</div>
+							</c:forEach>
 						</div>
 						<!-- 左右切换按钮 -->
 						<a class="carousel-control-prev" href="#demo" data-slide="prev">

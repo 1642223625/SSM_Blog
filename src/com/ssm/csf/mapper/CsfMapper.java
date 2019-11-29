@@ -33,6 +33,11 @@ public interface CsfMapper {
 
 	@Insert("insert into comment values(default,#{authorName},#{content},#{date},#{contact},#{article_id})")
 	Integer insertNewComment(Comment comment);
+
+	@Options(keyProperty = "id", keyColumn = "id", useGeneratedKeys = true)
+	@Insert("insert into menu values(default,#{name},#{belong})")
+	Integer insertNewType(Menu menu);
+
 	/*
 	 * Delete
 	 */

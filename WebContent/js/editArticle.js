@@ -22,3 +22,6 @@ function uploadPic() {
 	});
 	return false;
 }
+function setZIndex(){
+	$(".editor").css("z-index","1")
+}
