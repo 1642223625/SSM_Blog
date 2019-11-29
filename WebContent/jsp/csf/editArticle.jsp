@@ -77,7 +77,7 @@
 						</div>
 						<div class="form-group mt-2">
 							<label for="comment">简介：</label>
-      						<textarea class="form-control" rows="3" id="comment" name="content">${article.content}</textarea>
+      						<textarea class="form-control" rows="3" id="comment" name="content" style="resize: none;">${article.content}</textarea>
     					</div>
     					<label> 设置博文图片：</label><br>
       					<img id="showImg" class="rounded" width="99px" height="66px" alt="图片加载失败，请重试。注意：上传文件不要过大" 
