@@ -34,6 +34,8 @@ public class CsfController {
 	private LsdService lsdService;
 	@Value("${commentPageSize}")
 	private Integer commentPageSize;
+	@Value("${Server_IP}")
+	private String ip;
 
 	@ResponseBody
 	@RequestMapping("uploadArticlePic")
@@ -94,6 +96,7 @@ public class CsfController {
 			if (file.exists()) {
 				CSFUtil.deleteDictionary(file);
 			}
+			request.setAttribute("ip", ip);
 			request.setAttribute("next", "main");
 			return "csf/success";
 		}
@@ -142,6 +145,7 @@ public class CsfController {
 			request.setAttribute("article", csfService.selectArticleById(article.getId()));
 			// 获取该博文对应类型的层级路径
 			request.setAttribute("path", CSFUtil.getNavPath(csfService.selectAllMenu(), article.getMenu_id()));
+			request.setAttribute("ip", ip);
 			request.setAttribute("next", "main");// 设置下一次success页面中自动跳转的路径
 			return "csf/success";
 		} else {

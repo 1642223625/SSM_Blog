@@ -8,7 +8,7 @@
 <title>跳转页</title>
 <script type="text/javascript">
 	setTimeout(function(){
-		location.href="http://<%=InetAddress.getLocalHost().getHostAddress()%>:8080/SSM_Blog/${next}"
+		location.href="http://${ip}:8080<%=request.getContextPath()%>/${next}"
 	},4500)
 	setInterval(() => {
 		var num=document.getElementById("num")
