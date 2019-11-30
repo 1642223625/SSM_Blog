@@ -96,8 +96,8 @@
 						<div>
 							<input type="hidden" name="id" value="${article.id}"/>
 							<input type="hidden" name="pageNumber" value="1"/><!-- 该值用于记录评论记载次数，即分页查询的页数 --> 
-							<textarea class="textarea" name="content" placeholder="想对作者说点什么" required></textarea>
-							<input type="text" class="input_focus" name="authorName" size="20" placeholder="昵称" required/>
+							<textarea class="textarea" name="content" placeholder="想对作者说点什么" required="required"></textarea>
+							<input type="text" class="input_focus" name="authorName" size="20" placeholder="昵称" required="required"/>
 							<input type="text" class="input_focus" name="contact" size="30" placeholder="联系方式，仅作者可见"/>
 							<button class="btn mybtn pull-right" name="submit">发表</button>
 						</div>

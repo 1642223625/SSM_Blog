@@ -1,3 +1,4 @@
+<%@page import="java.net.InetAddress"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,8 +8,8 @@
 <title>跳转页</title>
 <script type="text/javascript">
 	setTimeout(function(){
-		location.href="http://localhost:8080/SSM_Blog/${next}"
-	},5000)
+		location.href="http://<%=InetAddress.getLocalHost().getHostAddress()%>:8080/SSM_Blog/${next}"
+	},4500)
 	setInterval(() => {
 		var num=document.getElementById("num")
 		num.innerText=num.innerText-1
