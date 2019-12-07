@@ -33,6 +33,7 @@
 		resultType="string">
 		select distinct date from article
 		<include refid="typeAndDate" />
+		group by date order by date desc
 	</select>
 	<resultMap type="tag" id="tags">
 		<result property="count" column="count(*)" />
