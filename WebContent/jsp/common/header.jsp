@@ -29,7 +29,8 @@
 								<a class="nav-link" href="main">个人随笔</a>
 								<a class="nav-link" href="main">个人日记</a>
 								<a class="nav-link" href="main">个人展示</a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item mydropdown"><a class="nav-link">技术杂谈</a>
 							<div class="mydropdown-content">
 								<a class="nav-link" href="main?type=C/CPP">C/CPP</a>
@@ -40,12 +41,8 @@
 								<a class="nav-link" href="main?type=Linux">Linux</a>
 								<a class="nav-link" href="main?type=Other">Other</a>
 							</div></li>
-						<li class="nav-item"><a class="nav-link" href="main">福利专区</a></li>
 						<li class="nav-item"><a class="nav-link" href="aboutMe">关于博主</a></li>
 						<li class="nav-item"><a class="nav-link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=WDU5Nj83Bys_BzswPTYYKSl2Ozc1" style="text-decoration:none;">给我写信</a></li>
-						<li class="nav-item"><a class="nav-link" href="main">赞助作者</a></li>
-						<li class="nav-item"><a class="nav-link" href="main">技术交流</a></li>
-						<li class="nav-item"><a class="nav-link" href="main">项目合作</a></li>
 						<li class="nav-item"><a class="nav-link mybtn-a mybtn" href="csf/addNewArticle">编写博文</a></li>
 					</ul>
 				</div>
