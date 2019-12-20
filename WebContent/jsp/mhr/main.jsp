@@ -32,7 +32,7 @@
 	<section class="container">
 		<div class="coontent-wrap">
 			<div class="content">
-				<c:if test="${pageInfo.type==null and pageInfo.date==null}">
+				<c:if test="${pageInfo.type==null and pageInfo.date==null and pageInfo.search==null}">
 					<div id="demo" class="carousel slide mt-3" data-ride="carousel">
 						<!-- 指示符 -->
 						<ul class="carousel-indicators">

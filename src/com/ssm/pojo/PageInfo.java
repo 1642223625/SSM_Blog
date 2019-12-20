@@ -11,6 +11,7 @@ public class PageInfo implements Serializable {
 	private Integer totalPage;
 	private String type;
 	private String date;
+	private String search;
 	private List<?> list;
 
 	public Integer getPageNumber() {
@@ -59,6 +60,14 @@ public class PageInfo implements Serializable {
 
 	public void setDate(String date) {
 		this.date = date;
+	}	
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 	public List<?> getList() {

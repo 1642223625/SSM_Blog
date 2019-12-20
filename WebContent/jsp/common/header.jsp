@@ -24,13 +24,6 @@
 				<div class="collapse justify-content-between navbar-collapse" id="collapsibleNavbar">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="main">首页</a></li>
-						<li class="nav-item mydropdown"><a class="nav-link">生活笔记</a>
-							<div class="mydropdown-content">
-								<a class="nav-link" href="main">个人随笔</a>
-								<a class="nav-link" href="main">个人日记</a>
-								<a class="nav-link" href="main">个人展示</a>
-							</div>
-						</li>
 						<li class="nav-item mydropdown"><a class="nav-link">技术杂谈</a>
 							<div class="mydropdown-content">
 								<a class="nav-link" href="main?type=C/CPP">C/CPP</a>
@@ -40,7 +33,8 @@
 								<a class="nav-link" href="main?type=Python">Python</a>
 								<a class="nav-link" href="main?type=Linux">Linux</a>
 								<a class="nav-link" href="main?type=Other">Other</a>
-							</div></li>
+							</div>
+						</li>
 						<li class="nav-item"><a class="nav-link" href="aboutMe">关于博主</a></li>
 						<li class="nav-item"><a class="nav-link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=WDU5Nj83Bys_BzswPTYYKSl2Ozc1" style="text-decoration:none;">给我写信</a></li>
 					</ul>
@@ -49,13 +43,10 @@
                         	<a class="nav-link mybtn-a mybtn mr-3" href="csf/addNewArticle">编写博文</a>
                         </li>
                         <li class="nav-item">
-                            <form action="666" method="POST">
+                            <form action="main" method="POST">
                                 <div class="input-group">
-                                    <input type="text" class="form-control nav-link h-100" placeholder="search" name="keywords">
-                                    <div class="input-group-append">
-                                      <input type="submit" class="btn mybtn border-0 input-group-text" value="搜索">
-                                    </div>
-                                  </div>
+                                    <input type="text" class="form-control nav-link h-100" name="search" value="${pageInfo.search}" placeholder="输入关键字，回车检索" name="keywords">
+                                </div>
                             </form>
                         </li>
                     </ul>

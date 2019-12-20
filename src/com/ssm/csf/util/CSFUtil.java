@@ -113,6 +113,8 @@ public class CSFUtil {
 		String pageNumberStr = request.getParameter("pageNumber");
 		pageInfo.setType(request.getParameter("type"));// 如果请求参数中存在类型信息，则修改pageInfo中的类型值
 		pageInfo.setDate(request.getParameter("date"));// 如果请求参数中存在类型信息，则修改pageInfo中的类型值
+		if (request.getParameter("search") != null)
+			pageInfo.setSearch(request.getParameter("search").length() == 0 ? null : request.getParameter("search"));// 如果请求参数中存在模糊查询信息，则修改pageInfo中的模糊查询值
 		if (pageNumberStr != null) {
 			// 如果请求参数中存在页码信息，则修改pageInfo中的页码值
 			pageInfo.setPageNumber(Integer.parseInt(pageNumberStr));
@@ -192,7 +194,7 @@ public class CSFUtil {
 		}
 		return null;
 	}
-	
+
 	public static String getDateJson(String date) {
 		try {
 			return objectMapper.writeValueAsString(date);
@@ -201,7 +203,7 @@ public class CSFUtil {
 		}
 		return null;
 	}
-	
+
 	public static String getObjectJson(Object object) {
 		try {
 			return objectMapper.writeValueAsString(object);
