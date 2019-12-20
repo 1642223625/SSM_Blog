@@ -11,7 +11,7 @@
 			<h1>开天辟地技术博客</h1>
 		</div>
 	</header>
-	<nav class="nav">
+	<nav class="nav border-bottom">
 		<div class="container">
 			<nav class="navbar navbar-expand-md bg-white navbar-mystyle">
 				<a class="navbar-brand" style="padding:10px" href="main">
@@ -43,17 +43,19 @@
 							</div></li>
 						<li class="nav-item"><a class="nav-link" href="aboutMe">关于博主</a></li>
 						<li class="nav-item"><a class="nav-link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=WDU5Nj83Bys_BzswPTYYKSl2Ozc1" style="text-decoration:none;">给我写信</a></li>
-						
-						
 					</ul>
 					<ul class="navbar-nav">
                         <li class="nav-item">
                         	<a class="nav-link mybtn-a mybtn mr-3" href="csf/addNewArticle">编写博文</a>
                         </li>
                         <li class="nav-item">
-                            <form class="form-inline" action="666" method="POST">
-                                <input type="text" class="nav-link form-control h-100" style="border-radius:5px 0 0 5px" placeholder="search" name="keywords">
-                                <input type="submit" class="btn mybtn nav-link form-control h-100 border-0" style="border-radius:0 5px 5px 0" value="搜索">
+                            <form action="666" method="POST">
+                                <div class="input-group">
+                                    <input type="text" class="form-control nav-link h-100" placeholder="search" name="keywords">
+                                    <div class="input-group-append">
+                                      <input type="submit" class="btn mybtn border-0 input-group-text" value="搜索">
+                                    </div>
+                                  </div>
                             </form>
                         </li>
                     </ul>
