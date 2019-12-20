@@ -42,7 +42,7 @@
 							</div></li>
 						<li class="nav-item"><a class="nav-link" href="main">福利专区</a></li>
 						<li class="nav-item"><a class="nav-link" href="aboutMe">关于博主</a></li>
-						<li class="nav-item"><a class="nav-link" href="main">给我留言</a></li>
+						<li class="nav-item"><a class="nav-link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=WDU5Nj83Bys_BzswPTYYKSl2Ozc1" style="text-decoration:none;">给我写信</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">赞助作者</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">技术交流</a></li>
 						<li class="nav-item"><a class="nav-link" href="main">项目合作</a></li>
