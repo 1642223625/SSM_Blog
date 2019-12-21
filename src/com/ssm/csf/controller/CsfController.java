@@ -3,6 +3,7 @@ package com.ssm.csf.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -181,10 +182,18 @@ public class CsfController {
 
 	@ResponseBody
 	@RequestMapping("addComment")
-	public String addComment(int id, Comment comment) {
+	public String addComment(int id, Comment comment, HttpServletRequest request) {
 		comment.setArticle_id(id);
 		comment.setDate(CSFUtil.getDetailDate(new Date()));
 		if (csfService.insertNewComment(comment) > 0) {
+			PageInfo pageInfo = (PageInfo) request.getSession().getAttribute("pageInfo");
+			@SuppressWarnings("unchecked")
+			List<Article> list = (List<Article>) pageInfo.getList();
+			for (Article article : list)
+				if (article.getId() == id) {
+					csfService.updateComment(id, article.getComment() + 1);
+					break;
+				}
 			return CSFUtil.getDateJson(comment.getDate());
 		}
 		return null;

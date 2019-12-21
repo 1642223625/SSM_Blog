@@ -129,7 +129,7 @@
 	   currtTop = document.documentElement.clientHeight + scrollTop
 	   pageNumber = $("input[name='pageNumber']").val()
 	   //注意当name=pageNumber的值标志为0时不再异步查询
-	   if(currtTop >= document.body.scrollHeight && currentPage == pageNumber && pageNumber != 0){
+	   if(currtTop+10 >= document.body.scrollHeight && currentPage == pageNumber && pageNumber != 0){
 		   currentPage = parseInt(currentPage)+1
 	       getNewComment()
 	   }
