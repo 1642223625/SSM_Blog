@@ -56,7 +56,8 @@ function getNewComment(){
 				}
 			$("#comments").append(item.join(""))		
 		} else {
-			alert("全部评论已加载完毕")
+			//alert("全部评论已加载完毕")
+			$("#comments").append("<center><strong>已加载全部评论</strong></center><hr>");
 			$("input[name='pageNumber']").val(0)//设置标志位为0
 		}
 	})
