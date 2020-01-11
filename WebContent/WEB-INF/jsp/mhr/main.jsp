@@ -1,4 +1,3 @@
-<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -183,6 +182,19 @@
 				</div>
 			</div>
 			<div class="block">
+				<span>标签云</span>
+				<hr>
+				<div class="d-flex flex-wrap">
+					<c:forEach items="${tags}" var="tag">
+						<div class="p-2 width-165">
+							<a
+								href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
+								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="block">
 				<span>猜你喜欢</span>
 				<c:forEach items="${comment}" var="article">
 					<hr>
@@ -205,19 +217,6 @@
 						</div>
 					</div>
 				</c:forEach>
-			</div>
-			<div class="block">
-				<span>标签云</span>
-				<hr>
-				<div class="d-flex flex-wrap">
-					<c:forEach items="${tags}" var="tag">
-						<div class="p-2 width-165">
-							<a
-								href="main?type=${tag.type}<c:if test="${pageInfo.date!=null}">&date=${pageInfo.date}</c:if>"
-								<c:if test="${tag.type == pageInfo.type}">style="color: red;"</c:if>>${tag.type}(${tag.count})</a>
-						</div>
-					</c:forEach>
-				</div>
 			</div>
 			<div class="block">
 				<span>友情链接</span>
